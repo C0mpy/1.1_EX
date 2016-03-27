@@ -1,0 +1,94 @@
+﻿<Window x:Class="_1_1EX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Left" MinWidth="200">
+            <Expander Margin="5" Padding="1" Header="Pretraga">
+                
+            </Expander>
+            <Expander Margin="5" Padding="1" Header="Resursi">
+                <StackPanel Orientation="Vertical">
+                    <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Grid.Row="0" Grid.Column="0" Content="Id:"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Margin="3" />
+                        
+                        <Label Grid.Row="1" Grid.Column="0" Content="Ime:"/>
+                        <TextBox Grid.Column="1" Grid.Row="1" Margin="3" />
+                        
+                        <Label Grid.Row="2" Grid.Column="0" Content="Opis:"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="3" MinHeight="70" AcceptsReturn="True" TextWrapping="Wrap" />
+                        
+                        <Label Grid.Row="3" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Tip:"/>
+                        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Right" 
+                         MinWidth="80" Margin="0, 5, 0 , 5" Content="   Odaberi/Napravi...   "  />
+                        
+                        <Label Grid.Row="4" Grid.Column="0" Content="Frekvencija:"/>
+                        <ComboBox Grid.Row="4" Grid.Column="1">
+                            <ComboBoxItem IsSelected="True">Redak</ComboBoxItem>
+                            <ComboBoxItem>Čest</ComboBoxItem>
+                            <ComboBoxItem>Univerzalan</ComboBoxItem>
+                        </ComboBox>
+                        
+                        <Label Grid.Row="5" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Ikonica:"/>
+                        <Button Grid.Column="1" Margin="0, 5, 0 , 5" Grid.Row="5" HorizontalAlignment="Right" 
+                         MinWidth="80" Content="   Učitaj sa diska...   "  />
+                        
+                        <CheckBox Grid.Column="1" Grid.Row="6" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Obnovljiv resurs</CheckBox>
+                        <CheckBox Grid.Column="1" Grid.Row="7" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Strateška važnost</CheckBox>
+                        <CheckBox Grid.Column="1" Grid.Row="8" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Mogućnost eksploatisanja</CheckBox>
+
+                        <Label Grid.Row="9" Grid.Column="0" Content="Mera:"/>
+                        <ComboBox Grid.Row="9" Grid.Column="1">
+                            <ComboBoxItem IsSelected="True">Merica</ComboBoxItem>
+                            <ComboBoxItem>Barel</ComboBoxItem>
+                            <ComboBoxItem>Tona</ComboBoxItem>
+                            <ComboBoxItem>Kilogram</ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Grid.Row="10" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Cena($):"/>
+                        <TextBox Grid.Row="10"  Grid.Column="1" Margin="0, 5, 0 , 5" />
+
+                        <Label Grid.Row="11" Grid.Column="0" Margin="0, 0, 0 , 5" Content="Datum otkrivanja:"/>
+                        <DatePicker x:Name ="picker" Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right"
+		                    Margin="0, 0, 0 , 5" VerticalAlignment="Top"
+		                    SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+
+                        <Label Grid.Row="12" Grid.Column="0" Margin="0, 0, 0 , 5" Content="Etikete:"/>
+                        <Button Grid.Column="1"  Grid.Row="12" Margin="0, 0, 0 , 5" HorizontalAlignment="Right" 
+                         MinWidth="80" Content="   Odaberi/Napravi...   "  />
+
+                        <Button Grid.Column="1"  Grid.Row="13" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
+                         MinWidth="120" MinHeight="25" Content="   Dodaj  "  />
+
+                    </Grid>
+                </StackPanel>
+            </Expander>
+        </StackPanel>
+        <Image Source="map.jpg" Stretch="UniformToFill"/>
+        
+    </DockPanel>
+</Window>

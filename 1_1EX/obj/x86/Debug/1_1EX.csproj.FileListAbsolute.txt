@@ -1,0 +1,12 @@
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\bin\Debug\1_1EX.exe
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\bin\Debug\1_1EX.pdb
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\MainWindow.baml
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\MainWindow.g.cs
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\App.g.cs
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.cache
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.g.resources
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\_1_1EX.Properties.Resources.resources
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.exe
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.pdb
+c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
