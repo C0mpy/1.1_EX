@@ -190,5 +190,11 @@ namespace _1_1EX
             resurs = new Resurs();
         }
 
+        private void EtiketaClick(object sender, RoutedEventArgs e)
+        {
+            var ew = new _1_1EX.WinEtiketa.EtiketaWin();
+            ew.Show();
+        }
+
     }
 }

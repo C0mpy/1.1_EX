@@ -23,3 +23,9 @@ C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Prop
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.lref
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.lref
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\WinEtiketa\EtiketaWin.baml
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\WinEtiketa\EtiketaWin.g.cs
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\bin\Debug\WPFToolkit.dll
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\Mijura\Documents\visual studio 2010\Projects\1_1EX\1_1EX\bin\Debug\WPFToolkit.pdb
