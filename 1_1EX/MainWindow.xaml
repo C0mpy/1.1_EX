@@ -114,7 +114,7 @@
 
                         <Label Grid.Row="15" Grid.Column="0" Margin="0, 0, 0 , 5" Content="Tags:"/>
                         <!--Event za odabir/izradu etikete-->
-                        <Button x:Name="etikete" Grid.Row="15" Grid.Column="1" Margin="0, 0, 0 , 5" HorizontalAlignment="Right" 
+                        <Button x:Name="etiketeButton" Grid.Row="15" Grid.Column="1" Margin="0, 0, 0 , 5" HorizontalAlignment="Right" 
                          MinWidth="80" Content="   Select/Create...   " Click="EtiketaClick" />
 
                         <Button Grid.Row="16" Grid.Column="1" x:Name="dodajButton" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 

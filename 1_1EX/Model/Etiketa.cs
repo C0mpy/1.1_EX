@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Drawing;
+using System.Windows.Media;
 using System.Windows;
 
 namespace _1_1EX.Model
@@ -23,8 +23,8 @@ namespace _1_1EX.Model
 
         public Etiketa() 
         {
-            Id = "idEtikete";
-            Boja = Color.Beige;
+            Id = "";
+            boja = Color.FromRgb(255, 255, 255);
             Opis = "opisEtikete";
         }
 

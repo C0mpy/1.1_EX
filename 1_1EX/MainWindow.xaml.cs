@@ -22,14 +22,13 @@ namespace _1_1EX
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
-        public static List<Resurs> resursi;
+        public static List<Resurs> resursi = new List<Resurs>();
+        public static List<Etiketa> etikete = new List<Etiketa>();
 
         public MainWindow()
         {
             InitializeComponent();
             resurs = new Resurs();
-            resursi = new List<Resurs>();
-
             this.DataContext = this;
 
             iscrtajSliku();
@@ -78,7 +77,7 @@ namespace _1_1EX
         }
 
         #region NotifyProperties
-        private Resurs resurs;
+        public static Resurs resurs;
         public string Id
         {
             get
@@ -153,9 +152,8 @@ namespace _1_1EX
             cena.Text = "0";
             picker.SelectedDate = DateTime.Today;
 
-
         }
-
+        
         void dodaj_Click(object sender, RoutedEventArgs e)
         {
             if (resurs.Id == "" || resurs.Ime == "")
@@ -179,8 +177,6 @@ namespace _1_1EX
             resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
-            //TODO Implementirati dodavanje i odabir etikete
-            resurs.dodajEtiketu(new Etiketa());
             resursi.Add(resurs);
             for (int i = 0; i < resursi.Count; i++)
             {

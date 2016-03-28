@@ -32,7 +32,7 @@ namespace _1_1EX.Model
         }
 
         public Resurs(string Id, string Ime, string Opis, TipResursa Tip, Frekvencija Frek, string Ikonica, bool Obnovljiv,
-            bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum) {
+            bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum, ref List<Etiketa> Etikete) {
 
                 id = Id;
                 ime = Ime;
@@ -46,14 +46,14 @@ namespace _1_1EX.Model
                 mera = Mer;
                 cena = Cena;
                 datum = Datum;
-                etikete = new List<Etiketa>();
+                etikete = Etikete;
         }
         
         public void dodajEtiketu(Etiketa etiketa){
             etikete.Add(etiketa);
         }
 
-        public List<Etiketa> Etikete
+        public List<Etiketa> Etikete1
         {
             get { return etikete; }
             set { etikete = value; }
@@ -140,7 +140,7 @@ namespace _1_1EX.Model
         public string etiketeToString()
         {
             string s = "";
-            foreach (Etiketa e in Etikete)
+            foreach (Etiketa e in Etikete1)
             {
                 s += "[ " + e.ToString() + " ] ";
             }

@@ -72,4 +72,28 @@ namespace _1_1EX
 
         }
     }
+
+    public class idTagExistsValidationRule : ValidationRule
+    {
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            string s = value as string;
+            if (s == "")
+            {
+                return new ValidationResult(false, "Please input an ID.");
+            }
+            foreach (Etiketa r in MainWindow.etikete)
+            {
+                if (r.Id == s)
+                {
+                    return new ValidationResult(false, "Tag with inputted ID exists.");
+                }
+
+            }
+
+            return new ValidationResult(true, null);
+        }
+    }
+
 }
