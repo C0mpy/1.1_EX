@@ -31,3 +31,4 @@ C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Prop
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.exe
 C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csprojResolveAssemblyReference.cache
