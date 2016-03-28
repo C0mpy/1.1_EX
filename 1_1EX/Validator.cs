@@ -96,4 +96,27 @@ namespace _1_1EX
         }
     }
 
+    public class idTypeExistsValidationRule : ValidationRule
+    {
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            string s = value as string;
+            if (s == "")
+            {
+                return new ValidationResult(false, "Please input an ID.");
+            }
+            foreach (TipResursa r in MainWindow.tipovi)
+            {
+                if (r.Id == s)
+                {
+                    return new ValidationResult(false, "Type with inputted ID exists.");
+                }
+
+            }
+
+            return new ValidationResult(true, null);
+        }
+    }
+
 }

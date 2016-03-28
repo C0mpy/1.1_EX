@@ -64,6 +64,9 @@
       <DependentUpon>EtiketaWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validator.cs" />
+    <Compile Include="WinTip\WinTip.xaml.cs">
+      <DependentUpon>WinTip.xaml</DependentUpon>
+    </Compile>
     <Page Include="WinEtiketa\EtiketaWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +83,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WinTip\WinTip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Etiketa.cs" />

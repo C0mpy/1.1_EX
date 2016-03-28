@@ -24,6 +24,7 @@ namespace _1_1EX
 
         public static List<Resurs> resursi = new List<Resurs>();
         public static List<Etiketa> etikete = new List<Etiketa>();
+        public static List<TipResursa> tipovi = new List<TipResursa>();
 
         public MainWindow()
         {
@@ -167,8 +168,6 @@ namespace _1_1EX
             
             resurs.Ime = ime.Text;
             resurs.Opis = opis.Text;
-            //TODO Implementirati dodavanje tipa resursa
-            resurs.Tip = new TipResursa();
             resurs.Frekvencija1 = (Frekvencija)Enum.Parse(typeof(Frekvencija), frekvencija.Text);
             //TODO Implementirati dodavanje ikonice
             resurs.Ikonica = "ikonica";
@@ -190,6 +189,12 @@ namespace _1_1EX
         {
             var ew = new _1_1EX.WinEtiketa.EtiketaWin();
             ew.Show();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var wt = new _1_1EX.WinTip.WinTip();
+            wt.Show();
         }
 
     }
