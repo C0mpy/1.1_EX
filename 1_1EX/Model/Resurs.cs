@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace _1_1EX.Model
 {
-    public enum Frekvencija { Redak, Cest, Univerzalan};
-    public enum Mera { Merica, Barel, Tona, Kilogram };
-    class Resurs
+    public enum Frekvencija { Rare, Common, Universal};
+    public enum Mera { Scoop, Barrel, Ton, Kilogram };
+    public class Resurs
     {
         string id;
         string ime;
@@ -22,6 +23,13 @@ namespace _1_1EX.Model
         double cena;
         DateTime datum;
         List<Etiketa> etikete;
+
+        public Resurs() {
+
+            id = "";
+            cena = 0;
+            etikete = new List<Etiketa>();
+        }
 
         public Resurs(string Id, string Ime, string Opis, TipResursa Tip, Frekvencija Frek, string Ikonica, bool Obnovljiv,
             bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum) {
@@ -45,26 +53,32 @@ namespace _1_1EX.Model
             etikete.Add(etiketa);
         }
 
+        public List<Etiketa> Etikete
+        {
+            get { return etikete; }
+            set { etikete = value; }
+        }
+
         public DateTime Datum
         {
             get { return datum; }
             set { datum = value; }
         }
 
-        internal TipResursa Tip
+        public TipResursa Tip
         {
             get { return tip; }
             set { tip = value; }
         }
 
-        internal Mera Mera1
+        public Mera Mera1
         {
             get { return mera; }
             set { mera = value; }
         }
-        
 
-        internal Frekvencija Frekvencija1
+
+        public Frekvencija Frekvencija1
         {
             get { return frekvencija; }
             set { frekvencija = value; }
@@ -94,7 +108,6 @@ namespace _1_1EX.Model
             set { obnovljiv = value; }
         }
 
-
         public string Ikonica
         {
             get { return ikonica; }
@@ -117,6 +130,21 @@ namespace _1_1EX.Model
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Id: {0}, Ime: {1}, Opis: {2}, Tip: {3}, Frekvencija: {4}, Ikonica: {5}, Obnovljiv: {6}, Vaznost: {7}, Eksploatacija: {8}, Mera: {9}, Cena: {10}, Datum: {11}, Etikete: {12}", Id, Ime, Opis, Tip.ToString(), Frekvencija1.ToString(), Ikonica, Obnovljiv.ToString(), Vaznost.ToString(), Eksploatacija.ToString(), Mera1.ToString(), Cena.ToString(), Datum.ToString(), etiketeToString());
+        }
+
+        public string etiketeToString()
+        {
+            string s = "";
+            foreach (Etiketa e in Etikete)
+            {
+                s += "[ " + e.ToString() + " ] ";
+            }
+            return s;
         }
     }
 }

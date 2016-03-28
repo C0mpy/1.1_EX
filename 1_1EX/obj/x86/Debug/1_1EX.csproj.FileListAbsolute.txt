@@ -10,3 +10,16 @@ c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\
 c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.exe
 c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\1_1EX.pdb
 c:\users\mijura\documents\visual studio 2010\Projects\1_1EX\1_1EX\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.exe
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\bin\Debug\1_1EX.exe
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\bin\Debug\1_1EX.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\MainWindow.baml
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\App.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.cache
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.g.resources
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Properties.Resources.resources
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.lref

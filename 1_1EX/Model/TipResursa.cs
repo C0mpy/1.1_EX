@@ -5,7 +5,7 @@ using System.Text;
 
 namespace _1_1EX.Model
 {
-    class TipResursa
+    public class TipResursa
     {
 
         string id;
@@ -18,6 +18,14 @@ namespace _1_1EX.Model
             ime = Ime;
             ikonica = Ikonica;
             opis = Opis;
+        }
+
+        public TipResursa()
+        {
+            Id = "IdTipa";
+            Ime = "ImeTipa";
+            Ikonica = "IkonicaTipa";
+            Opis = "OpisTipa";
         }
 
         public string Id
@@ -42,6 +50,11 @@ namespace _1_1EX.Model
         {
             get { return opis; }
             set { opis = value; }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("[Id: {0}, Ime: {1}, Ikonica: {2}, Opis:{3}]", Id, Ime, Ikonica, Opis);
         }
     }
 }

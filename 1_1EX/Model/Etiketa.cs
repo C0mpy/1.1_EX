@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Windows;
 
 namespace _1_1EX.Model
 {
-    class Etiketa
+    
+    public class Etiketa
     {
 
         string id;
@@ -17,6 +19,13 @@ namespace _1_1EX.Model
             id = Id;
             boja = Boja;
             opis = Opis;
+        }
+
+        public Etiketa() 
+        {
+            Id = "idEtikete";
+            Boja = Color.Beige;
+            Opis = "opisEtikete";
         }
 
         public Color Boja
@@ -35,6 +44,11 @@ namespace _1_1EX.Model
         {
             get { return id; }
             set { id = value; }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Id: {0}, Boja: {1}, Opis: {2}", Id, Boja.ToString(), Opis);
         }
     }
 }
