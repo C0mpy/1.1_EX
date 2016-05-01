@@ -65,6 +65,7 @@ namespace _1_1EX.WinTip
             tip.Opis = tipopis.Text;
             MainWindow.resurs.Tip = tip;
             MainWindow.tipovi.Add(tip);
+            Serializer.SaveTip();   //sacuvaj promene u fajl
             tip = new TipResursa();
             this.Close();
 

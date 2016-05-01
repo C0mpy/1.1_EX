@@ -22,7 +22,13 @@ namespace _1_1EX
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
 
+        //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
+        public static string active_map;
+        
+        //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
         public static List<Resurs> resursi = new List<Resurs>();
+
+        //ovo je isto za sve mape jel?
         public static List<Etiketa> etikete = new List<Etiketa>();
         public static List<TipResursa> tipovi = new List<TipResursa>();
 

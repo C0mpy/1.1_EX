@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTipResursa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TipResursa>
+    <Id>6789</Id>
+    <Ime>tipic</Ime>
+    <Ikonica>icon</Ikonica>
+    <Opis>nnn</Opis>
+  </TipResursa>
+</ArrayOfTipResursa>

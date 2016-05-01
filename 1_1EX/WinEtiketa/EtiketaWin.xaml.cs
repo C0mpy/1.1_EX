@@ -71,6 +71,7 @@ namespace _1_1EX.WinEtiketa
             tag.Opis = desctag.Text;
             MainWindow.resurs.Etikete1.Add(tag);
             MainWindow.etikete.Add(tag);
+            Serializer.SaveEtiketa();   //sacuvaj promene u fajl
             tag = new Etiketa();
             this.Close();
         }
