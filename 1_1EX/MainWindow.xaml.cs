@@ -43,11 +43,12 @@ namespace _1_1EX
 
         public MainWindow()
         {
+            
             InitializeComponent();
             this.DataContext = this;
             resurs = new Resurs();
-            types = new ObservableCollection<TipResursa>();
-            tags = new ObservableCollection<Etiketa>();
+            types = Serializer.LoadTip();
+            tags = Serializer.LoadEtiketa();
             iscrtajSliku();
             picker.SelectedDate = DateTime.Today;
         }

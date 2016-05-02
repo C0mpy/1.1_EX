@@ -71,7 +71,7 @@ namespace _1_1EX.WinEtiketa
             tag.Opis = desctag.Text;
             MainWindow.resurs.Etikete1.Add(tag);
             MainWindow.tags.Add(tag);
-            //Serializer.SaveEtiketa(); -- Ne poznaje mi serializer Mladjo :( sacuvaj promene u fajl
+            Serializer.SaveEtiketa(); //sacuvaj promene u fajl
             tag = new Etiketa();
             this.Close();
         }

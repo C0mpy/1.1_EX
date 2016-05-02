@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEtiketa xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Etiketa>
+    <Boja>
+      <A>255</A>
+      <R>148</R>
+      <G>0</G>
+      <B>211</B>
+      <ScA>1</ScA>
+      <ScR>0.296138257</ScR>
+      <ScG>0</ScG>
+      <ScB>0.651405632</ScB>
+    </Boja>
+    <Opis>afaefafe</Opis>
+    <Id>aeffaeafe</Id>
+  </Etiketa>
+</ArrayOfEtiketa>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Xml.Serialization;
+using System.Collections.ObjectModel;
 using _1_1EX.Model;
 
 namespace _1_1EX
@@ -24,22 +25,22 @@ namespace _1_1EX
 
         public static void SaveTip()
         {
-            WriteToXmlFile<List<TipResursa>>("tipresursa.xml",MainWindow.tipovi);
+            WriteToXmlFile<ObservableCollection<TipResursa>>("tags.xml",MainWindow.types);
         }
 
-        public static List<TipResursa> LoadTip()
+        public static ObservableCollection<TipResursa> LoadTip()
         {
-            return ReadFromXmlFile<List<TipResursa>>("tipresursa.xml");
+            return ReadFromXmlFile<ObservableCollection<TipResursa>>("tipresursa.xml");
         }
 
         public static void SaveEtiketa()
         {
-            WriteToXmlFile<List<Etiketa>>("etiketa.xml", MainWindow.etikete);
+            WriteToXmlFile<ObservableCollection<Etiketa>>("etiketa.xml", MainWindow.tags);
         }
 
-        public static List<Etiketa> LoadEtiketa()
+        public static ObservableCollection<Etiketa> LoadEtiketa()
         {
-            return ReadFromXmlFile<List<Etiketa>>("etiketa.xml");
+            return ReadFromXmlFile<ObservableCollection<Etiketa>>("etiketa.xml");
         }
 
 

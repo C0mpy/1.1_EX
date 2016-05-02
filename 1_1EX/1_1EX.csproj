@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Serializer.cs" />
     <Compile Include="WinEtiketa\EtiketaWin.xaml.cs">
       <DependentUpon>EtiketaWin.xaml</DependentUpon>
     </Compile>
