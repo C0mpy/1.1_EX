@@ -22,10 +22,10 @@ namespace _1_1EX.Model
 
         public TipResursa()
         {
-            Id = "IdTipa";
-            Ime = "ImeTipa";
-            Ikonica = "IkonicaTipa";
-            Opis = "OpisTipa";
+            Id = "";
+            Ime = "";
+            Ikonica = "";
+            Opis = "";
         }
 
         public string Id

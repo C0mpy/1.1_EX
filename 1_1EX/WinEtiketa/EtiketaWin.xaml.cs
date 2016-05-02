@@ -70,8 +70,8 @@ namespace _1_1EX.WinEtiketa
             tag.Boja = (Color)colorPicker.SelectedColor;
             tag.Opis = desctag.Text;
             MainWindow.resurs.Etikete1.Add(tag);
-            MainWindow.etikete.Add(tag);
-            Serializer.SaveEtiketa();   //sacuvaj promene u fajl
+            MainWindow.tags.Add(tag);
+            //Serializer.SaveEtiketa(); -- Ne poznaje mi serializer Mladjo :( sacuvaj promene u fajl
             tag = new Etiketa();
             this.Close();
         }

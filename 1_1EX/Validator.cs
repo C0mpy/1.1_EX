@@ -12,7 +12,7 @@ namespace _1_1EX
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-          
+
             string s = value as string;
             double r;
             if (s == "")
@@ -27,8 +27,8 @@ namespace _1_1EX
             {
                 return new ValidationResult(false, "Please input a numerical value.");
             }
-            
-               
+
+
         }
     }
 
@@ -42,7 +42,7 @@ namespace _1_1EX
             {
                 return new ValidationResult(false, "Please input an ID.");
             }
-            foreach(Resurs r in MainWindow.resursi) 
+            foreach (Resurs r in MainWindow.resursi)
             {
                 if (r.Id == s)
                 {
@@ -52,7 +52,7 @@ namespace _1_1EX
             }
 
             return new ValidationResult(true, null);
-        
+
 
         }
     }
@@ -83,13 +83,13 @@ namespace _1_1EX
             {
                 return new ValidationResult(false, "Please input an ID.");
             }
-            foreach (Etiketa r in MainWindow.etikete)
+
+            for (int i = 0; i < MainWindow.tags.Count; i++)
             {
-                if (r.Id == s)
+                if (MainWindow.tags.ElementAt(i).Id == s)
                 {
                     return new ValidationResult(false, "Tag with inputted ID exists.");
                 }
-
             }
 
             return new ValidationResult(true, null);
@@ -106,9 +106,9 @@ namespace _1_1EX
             {
                 return new ValidationResult(false, "Please input an ID.");
             }
-            foreach (TipResursa r in MainWindow.tipovi)
+            for (int i = 0; i < MainWindow.types.Count; i++)
             {
-                if (r.Id == s)
+                if (MainWindow.types.ElementAt(i).Id == s)
                 {
                     return new ValidationResult(false, "Type with inputted ID exists.");
                 }

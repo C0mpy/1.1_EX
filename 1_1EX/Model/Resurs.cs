@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace _1_1EX.Model
 {
-    public enum Frekvencija { Rare, Common, Universal};
+    public enum Frekvencija { Rare, Common, Universal };
     public enum Mera { Scoop, Barrel, Ton, Kilogram };
     public class Resurs
     {
@@ -22,38 +23,41 @@ namespace _1_1EX.Model
         Mera mera;
         double cena;
         DateTime datum;
-        List<Etiketa> etikete;
+        ObservableCollection<Etiketa> etikete;
 
-        public Resurs() {
+        public Resurs()
+        {
 
             id = "";
             cena = 0;
-            etikete = new List<Etiketa>();
+            etikete = new ObservableCollection<Etiketa>();
         }
 
         public Resurs(string Id, string Ime, string Opis, TipResursa Tip, Frekvencija Frek, string Ikonica, bool Obnovljiv,
-            bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum, ref List<Etiketa> Etikete) {
+            bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum, ObservableCollection<Etiketa> Etikete)
+        {
 
-                id = Id;
-                ime = Ime;
-                opis = Opis;
-                tip = Tip;
-                frekvencija = Frek;
-                ikonica = Ikonica;
-                obnovljiv = Obnovljiv;
-                vaznost = Vaznost;
-                eksploatacija = Eksploatacija;
-                mera = Mer;
-                cena = Cena;
-                datum = Datum;
-                etikete = Etikete;
+            id = Id;
+            ime = Ime;
+            opis = Opis;
+            tip = Tip;
+            frekvencija = Frek;
+            ikonica = Ikonica;
+            obnovljiv = Obnovljiv;
+            vaznost = Vaznost;
+            eksploatacija = Eksploatacija;
+            mera = Mer;
+            cena = Cena;
+            datum = Datum;
+            etikete = Etikete;
         }
-        
-        public void dodajEtiketu(Etiketa etiketa){
+
+        public void dodajEtiketu(Etiketa etiketa)
+        {
             etikete.Add(etiketa);
         }
 
-        public List<Etiketa> Etikete1
+        public ObservableCollection<Etiketa> Etikete1
         {
             get { return etikete; }
             set { etikete = value; }

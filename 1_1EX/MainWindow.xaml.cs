@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 using _1_1EX.Model;
 
 namespace _1_1EX
@@ -28,18 +29,26 @@ namespace _1_1EX
         //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
         public static List<Resurs> resursi = new List<Resurs>();
 
-        //ovo je isto za sve mape jel?
-        public static List<Etiketa> etikete = new List<Etiketa>();
-        public static List<TipResursa> tipovi = new List<TipResursa>();
+        public static ObservableCollection<TipResursa> types
+        {
+            get;
+            set;
+        }
+
+        public static ObservableCollection<Etiketa> tags
+        {
+            get;
+            set;
+        }
 
         public MainWindow()
         {
             InitializeComponent();
-            resurs = new Resurs();
             this.DataContext = this;
-
+            resurs = new Resurs();
+            types = new ObservableCollection<TipResursa>();
+            tags = new ObservableCollection<Etiketa>();
             iscrtajSliku();
-
             picker.SelectedDate = DateTime.Today;
         }
 
@@ -193,14 +202,14 @@ namespace _1_1EX
 
         private void EtiketaClick(object sender, RoutedEventArgs e)
         {
-            var ew = new _1_1EX.WinEtiketa.EtiketaWin();
+            var ew = new _1_1EX.WinTag.TagManagement(tags, resurs);
             ew.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void TypeClick(object sender, RoutedEventArgs e)
         {
-            var wt = new _1_1EX.WinTip.WinTip();
-            wt.Show();
+            var ew = new _1_1EX.WinTip.TypeManagement(types, resurs);
+            ew.Show();
         }
 
     }

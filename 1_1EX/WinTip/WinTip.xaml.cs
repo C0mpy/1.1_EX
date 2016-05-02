@@ -64,8 +64,9 @@ namespace _1_1EX.WinTip
             tip.Ikonica = "icon";
             tip.Opis = tipopis.Text;
             MainWindow.resurs.Tip = tip;
-            MainWindow.tipovi.Add(tip);
-            Serializer.SaveTip();   //sacuvaj promene u fajl
+            MainWindow.types.Add(tip);
+            //Serializer.SaveTip(); -- ne radi mi ni ovde mladjane :( a di je Serializer ?
+            //sacuvaj promene u fajl
             tip = new TipResursa();
             this.Close();
 

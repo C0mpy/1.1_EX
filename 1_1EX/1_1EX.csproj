@@ -64,6 +64,12 @@
       <DependentUpon>EtiketaWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validator.cs" />
+    <Compile Include="WinEtiketa\TagManagement.xaml.cs">
+      <DependentUpon>TagManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinTip\TypeManagement.xaml.cs">
+      <DependentUpon>TypeManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinTip\WinTip.xaml.cs">
       <DependentUpon>WinTip.xaml</DependentUpon>
     </Compile>
@@ -83,6 +89,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WinEtiketa\TagManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinTip\TypeManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinTip\WinTip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

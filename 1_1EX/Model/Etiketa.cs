@@ -25,7 +25,7 @@ namespace _1_1EX.Model
         {
             Id = "";
             boja = Color.FromRgb(255, 255, 255);
-            Opis = "opisEtikete";
+            Opis = "";
         }
 
         public Color Boja

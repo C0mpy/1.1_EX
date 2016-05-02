@@ -52,3 +52,26 @@ C:\Users\Mijura\Desktop\New folder (2)\1.1_EX\1_1EX\obj\x86\Debug\MainWindow.bam
 C:\Users\Mijura\Desktop\New folder (2)\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.g.resources
 C:\Users\Mijura\Desktop\New folder (2)\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Properties.Resources.resources
 C:\Users\Mijura\Desktop\New folder (2)\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.exe
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csprojResolveAssemblyReference.cache
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\EtiketaWin.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinTip\WinTip.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\App.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.cache
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX_MarkupCompile.lref
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\TagManagement.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinTip\TypeManagement.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\bin\Debug\1_1EX.exe
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\bin\Debug\1_1EX.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\bin\Debug\WPFToolkit.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\EtiketaWin.baml
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\MainWindow.baml
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinTip\WinTip.baml
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\TagManagement.baml
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\WinTip\TypeManagement.baml
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.g.resources
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Properties.Resources.resources
+C:\Users\Dark ChestOf Wonders\Desktop\New folder\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
