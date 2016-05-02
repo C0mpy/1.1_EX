@@ -68,6 +68,9 @@
     <Compile Include="WinEtiketa\TagManagement.xaml.cs">
       <DependentUpon>TagManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinResurs\WinResurs.xaml.cs">
+      <DependentUpon>WinResurs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinTip\TypeManagement.xaml.cs">
       <DependentUpon>TypeManagement.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WinEtiketa\TagManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinResurs\WinResurs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="map.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SlikeResursi\mario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="add2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

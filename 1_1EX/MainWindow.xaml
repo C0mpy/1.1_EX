@@ -5,10 +5,14 @@
         Title="MainWindow" WindowState="Maximized" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="350" Width="525">
     <DockPanel>
         <StackPanel DockPanel.Dock="Left" MinWidth="200">
-            <Expander Margin="5" Padding="1" Header="Search">
-                
-            </Expander>
             <Expander Margin="5" Padding="1" Header="Resources">
+                <Border x:Name="border" BorderBrush="SkyBlue" BorderThickness="1" Height="136">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                        <Grid Name="gr1" Height="120" Width="207"></Grid>
+                    </ScrollViewer>
+                </Border>
+            </Expander>
+            <Expander Margin="5" Padding="1" Header="Add Resource">
                 <StackPanel Orientation="Vertical">
                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                     <Grid>
@@ -80,7 +84,7 @@
                         <Label Grid.Row="7" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Icon:"/>
                         <!--TODO Event za odabir ikonice-->
                         <Button x:Name="ikonica" Grid.Row="7" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right" 
-                         MinWidth="80" Content="   Browse...   "  />
+                         MinWidth="80" Content="   Browse...   "  Click="odaberiIkonicu" />
 
                         <CheckBox x:Name="obnovljiv" Grid.Row="8" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Renewable Resource</CheckBox>
                         <CheckBox x:Name="vaznost" Grid.Row="9" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Strategic Importance</CheckBox>

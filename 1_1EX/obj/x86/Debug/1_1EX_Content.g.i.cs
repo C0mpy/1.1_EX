@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("map.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("add2.png")]
 
 
