@@ -51,15 +51,18 @@ namespace _1_1EX
             InitializeComponent();
             this.DataContext = this;
             resurs = new Resurs();
+            active_map = "mapa1resursi";
             types = Serializer.LoadTip();
             tags = Serializer.LoadEtiketa();
-            //resursi = Serializer.ReadResources();
+            resursi = Serializer.ReadResources();
             ucitajResurse();
             picker.SelectedDate = DateTime.Today;
+
+             
         }
 
 
-        private void ucitajResurse()
+        public void ucitajResurse()
         {
 
             gr1.Children.Clear();
@@ -119,12 +122,12 @@ namespace _1_1EX
                     
                     carImg[i].Source = new BitmapImage(new Uri(resursi[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
 
-
+                    int index = i;
                     MenuItem modMenuItem = new MenuItem();
                     modMenuItem.Header = "Modify";
+                    modMenuItem.Click += (sender, e) => modifyResourceAction(index);
                     MenuItem delMenuItem = new MenuItem();
                     delMenuItem.Header = "Delete";
-                    int index = i;
                     delMenuItem.Click += (sender, e) => deleteResourceAction(index);
                     ContextMenu cm = new ContextMenu();
                     cm.Items.Add(modMenuItem);
@@ -152,15 +155,24 @@ namespace _1_1EX
 
         }
 
+        private void modifyResourceAction(int i)
+        {
+            WinResurs wr = new WinResurs();
+            wr.setData(this, resursi[i], i);
+            wr.Show();
+        }
+
         private void deleteResourceAction(int i)
         {
-            MessageBox.Show("Resource with id " + i + " has been deleted!");
+            MessageBox.Show("Resource with id " + resursi[i].Id + " has been deleted!");
             resursi.RemoveAt(i);
             ucitajResurse();
-            Serializer.WriteResources(resursi);
+            Serializer.WriteResources();
             
 
         }
+
+        
 
         private void odaberiIkonicu(object sender, RoutedEventArgs e)
         {
@@ -318,7 +330,7 @@ namespace _1_1EX
             dodajResursFormReset();
             resurs = new Resurs();
             ucitajResurse();
-            Serializer.WriteResources(resursi);
+            Serializer.WriteResources();
         }
 
         private void EtiketaClick(object sender, RoutedEventArgs e)

@@ -28,6 +28,8 @@ namespace _1_1EX
 
         //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
         public static List<Resurs> resursi = new List<Resurs>();
+        public int index;
+        public MainWindow mw;
 
         public static ObservableCollection<TipResursa> types
         {
@@ -187,12 +189,13 @@ namespace _1_1EX
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
             resursi.Add(resurs);
-            for (int i = 0; i < resursi.Count; i++)
-            {
-                MessageBox.Show(resursi[i].ToString());
-            }
+            
             dodajResursFormReset();
             resurs = new Resurs();
+            MessageBox.Show("Resource with id " + index + " has been modifyed!");
+            MainWindow.resursi[index] = resurs;
+            mw.ucitajResurse();
+            Serializer.WriteResources();
         }
 
         private void EtiketaClick(object sender, RoutedEventArgs e)
@@ -205,6 +208,25 @@ namespace _1_1EX
         {
             var ew = new _1_1EX.WinTip.TypeManagement(types, resurs);
             ew.Show();
+        }
+
+        public void setData(MainWindow mwin, Resurs r, int i) {
+
+            mw = mwin;
+            index = i;
+            
+            id.Text = r.Id;
+            ime.Text = r.Ime;
+            opis.Text = r.Opis;
+            resurs.Ikonica = r.Ikonica;
+            //setovat frekvenciju u combo box
+
+            obnovljiv.IsChecked = r.Obnovljiv;
+            vaznost.IsChecked = r.Vaznost;
+            eksploatacija.IsChecked = r.Eksploatacija;
+            cena.Text = (r.Cena).ToString();
+
+
         }
 
     }

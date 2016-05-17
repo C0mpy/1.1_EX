@@ -13,9 +13,9 @@ namespace _1_1EX
     //staticna klasa ~ ne instancira se samo pozoves Serializer.Write/Read
     static class Serializer
     {
-        public static void WriteResources( List<Resurs> data)
+        public static void WriteResources()
         {
-            WriteToXmlFile<List<Resurs>>(MainWindow.active_map + ".xml", data);
+            WriteToXmlFile<List<Resurs>>(MainWindow.active_map + ".xml", MainWindow.resursi);
         }
 
         public static List<Resurs> ReadResources()
@@ -25,7 +25,7 @@ namespace _1_1EX
 
         public static void SaveTip()
         {
-            WriteToXmlFile<ObservableCollection<TipResursa>>("tags.xml",MainWindow.types);
+            WriteToXmlFile<ObservableCollection<TipResursa>>("tipresursa.xml", MainWindow.types);
         }
 
         public static ObservableCollection<TipResursa> LoadTip()
