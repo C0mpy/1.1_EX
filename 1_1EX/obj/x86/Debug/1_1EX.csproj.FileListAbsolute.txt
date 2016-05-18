@@ -101,3 +101,12 @@ C:\Users\Mijura\Desktop\hci2\1.1_EX\1_1EX\obj\x86\Debug\_1_1EX.Properties.Resour
 C:\Users\Mijura\Desktop\hci2\1.1_EX\1_1EX\obj\x86\Debug\1_1EX.csproj.GenerateResource.Cache
 C:\Users\Mijura\Desktop\hci2\1.1_EX\1_1EX\obj\x86\Debug\WinResurs\WinResurs.g.cs
 C:\Users\Mijura\Desktop\hci2\1.1_EX\1_1EX\obj\x86\Debug\WinResurs\WinResurs.baml
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\bin\Debug\WPFToolkit.pdb
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\TagManagement.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinResurs\WinResurs.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinTip\TypeManagement.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinTip\WinTip.g.cs
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinEtiketa\TagManagement.baml
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinResurs\WinResurs.baml
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinTip\TypeManagement.baml
+C:\Users\Dark ChestOf Wonders\Desktop\HCI\1.1_EX\1_1EX\obj\x86\Debug\WinTip\WinTip.baml

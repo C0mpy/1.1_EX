@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Create Label" Height="422" Width="408" 
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:src="clr-namespace:_1_1EX">
+        xmlns:src="clr-namespace:_1_1EX"
+        ResizeMode="NoResize">
     
     <Grid Height="382">
         <Rectangle Height="100" HorizontalAlignment="Left" Margin="0,282,0,0" Name="rectangle1" VerticalAlignment="Top" Width="400" Stroke="#FFEFE5E5" Fill="#FF008299">

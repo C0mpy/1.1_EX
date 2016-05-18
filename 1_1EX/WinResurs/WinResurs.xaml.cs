@@ -188,10 +188,8 @@ namespace _1_1EX
             resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
-            resursi.Add(resurs);
             
             dodajResursFormReset();
-            resurs = new Resurs();
             MessageBox.Show("Resource with id " + index + " has been modifyed!");
             MainWindow.resursi[index] = resurs;
             mw.ucitajResurse();
@@ -226,6 +224,8 @@ namespace _1_1EX
             eksploatacija.IsChecked = r.Eksploatacija;
             cena.Text = (r.Cena).ToString();
 
+
+            
 
         }
 

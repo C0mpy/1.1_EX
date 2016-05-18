@@ -29,6 +29,7 @@ namespace _1_1EX.Model
         {
 
             id = "";
+            ikonica = "";
             cena = 0;
             etikete = new ObservableCollection<Etiketa>();
         }

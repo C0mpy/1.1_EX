@@ -1,2 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfResurs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfResurs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Resurs>
+    <Etikete1>
+      <Etiketa>
+        <Boja>
+          <A>255</A>
+          <R>0</R>
+          <G>0</G>
+          <B>128</B>
+          <ScA>1</ScA>
+          <ScR>0</ScR>
+          <ScG>0</ScG>
+          <ScB>0.2158605</ScB>
+        </Boja>
+        <Opis>tag1</Opis>
+        <Id>tag1</Id>
+      </Etiketa>
+      <Etiketa>
+        <Boja>
+          <A>255</A>
+          <R>220</R>
+          <G>20</G>
+          <B>60</B>
+          <ScA>1</ScA>
+          <ScR>0.7156935</ScR>
+          <ScG>0.00699541</ScG>
+          <ScB>0.045186203</ScB>
+        </Boja>
+        <Opis>tag2</Opis>
+        <Id>tag2</Id>
+      </Etiketa>
+    </Etikete1>
+    <Datum>2016-05-18T00:00:00+02:00</Datum>
+    <Tip>
+      <Id>1</Id>
+      <Ime>1</Ime>
+      <Ikonica>icon</Ikonica>
+      <Opis>1</Opis>
+    </Tip>
+    <Mera1>Scoop</Mera1>
+    <Frekvencija1>Rare</Frekvencija1>
+    <Cena>0</Cena>
+    <Eksploatacija>false</Eksploatacija>
+    <Vaznost>true</Vaznost>
+    <Obnovljiv>true</Obnovljiv>
+    <Ikonica>C:\Users\Dark ChestOf Wonders\Desktop\unnamed.png</Ikonica>
+    <Opis>aef</Opis>
+    <Ime>aef</Ime>
+    <Id>af</Id>
+  </Resurs>
+</ArrayOfResurs>

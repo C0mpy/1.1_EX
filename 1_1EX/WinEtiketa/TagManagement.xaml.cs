@@ -39,8 +39,30 @@ namespace _1_1EX.WinTag
             this.DataContext = this;
             tags = t;
             resource = r;
+            dgTags.ItemsSource = tags;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
 
+        }
+
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (resource.Etikete1 != null)
+            {
+                for (int j = 0; j < resource.Etikete1.Count; j++)
+                {
+                    for (int i = 0; i < dgTags.Items.Count; i++)
+                    {
+                        if (resource.Etikete1[j].Id == tags[i].Id)
+                        {
+                            CheckBox rb = TypeManagement.FindVisualChildren<CheckBox>(dgTags).ElementAt(i);
+                            rb.IsChecked = true;
+                            break;
+                        }
+                    }
+                }
+                
+            }
         }
 
         private void TagCreateClick(object sender, RoutedEventArgs e)
@@ -58,10 +80,34 @@ namespace _1_1EX.WinTag
         {
             for (int j = 0; j < dgTags.Items.Count; j++)
             {
-                CheckBox cb = TypeManagement.FindVisualChildren<CheckBox>(dgTags).FirstOrDefault();
+                CheckBox cb = TypeManagement.FindVisualChildren<CheckBox>(dgTags).ElementAt(j);
                 if (cb.IsChecked == true)
                 {
-                    resource.Etikete1.Add(tags.ElementAt(j));
+                    bool exists = false;
+                    for (int i = 0; i < resource.Etikete1.Count; i++)
+                    {
+                        if (resource.Etikete1[i].Id == tags.ElementAt(j).Id)
+                        {
+                            exists = true;
+                            break;
+                        }
+
+                    }
+                    if (!exists)
+                    {
+                        resource.Etikete1.Add(tags.ElementAt(j));
+                    }
+                }
+                if (cb.IsChecked == false)
+                {
+                    for (int i = 0; i < resource.Etikete1.Count; i++)
+                    {
+                        if (resource.Etikete1[i].Id == tags.ElementAt(j).Id)
+                        {
+                            resource.Etikete1.RemoveAt(i);
+                            break;
+                        }
+                    }
                 }
             }
 

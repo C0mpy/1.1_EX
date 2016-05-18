@@ -14,4 +14,32 @@
     <Opis>afaefafe</Opis>
     <Id>aeffaeafe</Id>
   </Etiketa>
+  <Etiketa>
+    <Boja>
+      <A>255</A>
+      <R>0</R>
+      <G>0</G>
+      <B>128</B>
+      <ScA>1</ScA>
+      <ScR>0</ScR>
+      <ScG>0</ScG>
+      <ScB>0.2158605</ScB>
+    </Boja>
+    <Opis>tag1</Opis>
+    <Id>tag1</Id>
+  </Etiketa>
+  <Etiketa>
+    <Boja>
+      <A>255</A>
+      <R>220</R>
+      <G>20</G>
+      <B>60</B>
+      <ScA>1</ScA>
+      <ScR>0.7156935</ScR>
+      <ScG>0.00699541</ScG>
+      <ScB>0.045186203</ScB>
+    </Boja>
+    <Opis>tag2</Opis>
+    <Id>tag2</Id>
+  </Etiketa>
 </ArrayOfEtiketa>

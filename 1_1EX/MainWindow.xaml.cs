@@ -109,9 +109,6 @@ namespace _1_1EX
                     gr1.Height += 40;
                 }
 
-
-
-
                 carImg[i] = new Image();
                 if (i == br - 1)
                 {
@@ -168,11 +165,7 @@ namespace _1_1EX
             resursi.RemoveAt(i);
             ucitajResurse();
             Serializer.WriteResources();
-            
-
         }
-
-        
 
         private void odaberiIkonicu(object sender, RoutedEventArgs e)
         {
@@ -202,8 +195,6 @@ namespace _1_1EX
 
             // ... Get nullable DateTime from SelectedDate.
             DateTime? date = picker.SelectedDate;
-
-            
 
             if (date == null)
             {
@@ -318,19 +309,20 @@ namespace _1_1EX
             resurs.Ime = ime.Text;
             resurs.Opis = opis.Text;
             resurs.Frekvencija1 = (Frekvencija)Enum.Parse(typeof(Frekvencija), frekvencija.Text);
-            //TODO Implementirati dodavanje ikonice
-            //resurs.Ikonica = "ikonica";
             resurs.Obnovljiv = (bool)obnovljiv.IsChecked;
             resurs.Vaznost = (bool)vaznost.IsChecked;
             resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
             resursi.Add(resurs);
-            
+
+            MessageBox.Show(resurs.ToString());
+
             dodajResursFormReset();
             resurs = new Resurs();
             ucitajResurse();
             Serializer.WriteResources();
+
         }
 
         private void EtiketaClick(object sender, RoutedEventArgs e)

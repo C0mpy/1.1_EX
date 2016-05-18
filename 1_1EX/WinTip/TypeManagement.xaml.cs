@@ -37,20 +37,25 @@ namespace _1_1EX.WinTip
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             types = t;
             resource = r;
+            dgTypes.ItemsSource = types;
+            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+        }
 
-            for (int i = 0; i < dgTypes.Columns.Count; i++)
+        void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            if (resource.Tip != null)
             {
-                if (r.Tip != null)
+                for (int i = 0; i < dgTypes.Items.Count; i++)
                 {
-                    if (r.Tip.Id == dgTypes.Columns[1].GetCellContent(i).ToString())
+                    if (resource.Tip.Id == types[i].Id)
                     {
-                        (dgTypes.Columns[0].GetCellContent(i) as RadioButton).IsChecked = true;
+                        RadioButton rb = FindVisualChildren<RadioButton>(dgTypes).ElementAt(i);
+                        rb.IsChecked = true;
                         break;
                     }
                 }
             }
-
-            dgTypes.ItemsSource = types;
         }
 
         private void TypeCreateClick(object sender, RoutedEventArgs e)
@@ -70,14 +75,13 @@ namespace _1_1EX.WinTip
 
             for (int j = 0; j < dgTypes.Items.Count; j++)
             {
-                RadioButton rb = FindVisualChildren<RadioButton>(dgTypes).FirstOrDefault();
+                RadioButton rb = FindVisualChildren<RadioButton>(dgTypes).ElementAt(j);
                 if (rb.IsChecked == true)
                 {
                     resource.Tip = types.ElementAt(j);
                     break;
                 }
             }
-
 
             this.Close();
         }

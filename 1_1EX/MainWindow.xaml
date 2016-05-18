@@ -8,7 +8,7 @@
             <Expander Margin="5" Padding="1" Header="Resources">
                 <Border x:Name="border" BorderBrush="SkyBlue" BorderThickness="1" Height="136">
                     <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
-                        <Grid Name="gr1" Height="120" Width="207"></Grid>
+                        <Grid Name="gr1" Height="120" Width="273"></Grid>
                     </ScrollViewer>
                 </Border>
             </Expander>
@@ -144,7 +144,8 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <Image Source="map.jpg" Stretch="UniformToFill"/>
-        
+
+        <Image x:Name="image" Source="map.jpg"/>
+                      
     </DockPanel>
 </Window>
