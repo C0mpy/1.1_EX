@@ -235,7 +235,7 @@ namespace _1_1EX
             }
         }
 
-        public double Cena
+        public string Cena
         {
             get
             {
@@ -293,8 +293,9 @@ namespace _1_1EX
             cena.Text = "0";
             picker.SelectedDate = DateTime.Today;
 
+
         }
-        
+
         void dodaj_Click(object sender, RoutedEventArgs e)
         {
             if (resurs.Id == "" || resurs.Ime == "")
@@ -316,12 +317,16 @@ namespace _1_1EX
             resurs.Datum = (DateTime)picker.SelectedDate;
             resursi.Add(resurs);
 
-            MessageBox.Show(resurs.ToString());
+            MessageBox.Show(resursi.Count.ToString());
+            for (int i = 0; i < resursi.Count; i++)
+            {
+                MessageBox.Show(resursi.ElementAt(i).ToString());
+            }
 
-            dodajResursFormReset();
-            resurs = new Resurs();
             ucitajResurse();
             Serializer.WriteResources();
+            resurs = new Resurs();
+            dodajResursFormReset();
 
         }
 

@@ -21,21 +21,21 @@ namespace _1_1EX.Model
         bool vaznost;
         bool eksploatacija;
         Mera mera;
-        double cena;
+        string cena;
         DateTime datum;
         ObservableCollection<Etiketa> etikete;
 
         public Resurs()
         {
-
             id = "";
+            tip = new TipResursa();
             ikonica = "";
-            cena = 0;
+            cena = "0";
             etikete = new ObservableCollection<Etiketa>();
         }
 
         public Resurs(string Id, string Ime, string Opis, TipResursa Tip, Frekvencija Frek, string Ikonica, bool Obnovljiv,
-            bool Vaznost, bool Eksploatacija, Mera Mer, double Cena, DateTime Datum, ObservableCollection<Etiketa> Etikete)
+            bool Vaznost, bool Eksploatacija, Mera Mer, string Cena, DateTime Datum, ObservableCollection<Etiketa> Etikete)
         {
 
             id = Id;
@@ -89,7 +89,7 @@ namespace _1_1EX.Model
             set { frekvencija = value; }
         }
 
-        public double Cena
+        public string Cena
         {
             get { return cena; }
             set { cena = value; }
@@ -139,7 +139,7 @@ namespace _1_1EX.Model
 
         public override string ToString()
         {
-            return String.Format("Id: {0}, Ime: {1}, Opis: {2}, Tip: {3}, Frekvencija: {4}, Ikonica: {5}, Obnovljiv: {6}, Vaznost: {7}, Eksploatacija: {8}, Mera: {9}, Cena: {10}, Datum: {11}, Etikete: {12}", Id, Ime, Opis, Tip.ToString(), Frekvencija1.ToString(), Ikonica, Obnovljiv.ToString(), Vaznost.ToString(), Eksploatacija.ToString(), Mera1.ToString(), Cena.ToString(), Datum.ToString(), etiketeToString());
+            return String.Format("Id: {0}, Ime: {1}, Opis: {2}, Tip: {3}, Frekvencija: {4}, Ikonica: {5}, Obnovljiv: {6}, Vaznost: {7}, Eksploatacija: {8}, Mera: {9}, Cena: {10}, Datum: {11}, Etikete: {12}", Id, Ime, Opis, Tip.ToString(), Frekvencija1.ToString(), Ikonica, Obnovljiv.ToString(), Vaznost.ToString(), Eksploatacija.ToString(), Mera1.ToString(), Cena, Datum.ToString(), etiketeToString());
         }
 
         public string etiketeToString()

@@ -27,7 +27,6 @@ namespace _1_1EX
         public static string active_map;
 
         //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
-        public static List<Resurs> resursi = new List<Resurs>();
         public int index;
         public MainWindow mw;
 
@@ -45,13 +44,11 @@ namespace _1_1EX
 
         public WinResurs()
         {
-
             InitializeComponent();
             this.DataContext = this;
             resurs = new Resurs();
             types = Serializer.LoadTip();
             tags = Serializer.LoadEtiketa();
-            
             picker.SelectedDate = DateTime.Today;
         }
 
@@ -107,7 +104,7 @@ namespace _1_1EX
             }
         }
 
-        public double Cena
+        public String Cena
         {
             get
             {
@@ -152,21 +149,6 @@ namespace _1_1EX
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        void dodajResursFormReset()
-        {
-            id.Text = "";
-            ime.Text = "";
-            opis.Text = "";
-            frekvencija.SelectedIndex = 0;
-            obnovljiv.IsChecked = false;
-            vaznost.IsChecked = false;
-            eksploatacija.IsChecked = false;
-            mera.SelectedIndex = 0;
-            cena.Text = "0";
-            picker.SelectedDate = DateTime.Today;
-
-        }
-
         void dodaj_Click(object sender, RoutedEventArgs e)
         {
             if (resurs.Id == "" || resurs.Ime == "")
@@ -181,7 +163,6 @@ namespace _1_1EX
             resurs.Ime = ime.Text;
             resurs.Opis = opis.Text;
             resurs.Frekvencija1 = (Frekvencija)Enum.Parse(typeof(Frekvencija), frekvencija.Text);
-            //TODO Implementirati dodavanje ikonice
             resurs.Ikonica = "ikonica";
             resurs.Obnovljiv = (bool)obnovljiv.IsChecked;
             resurs.Vaznost = (bool)vaznost.IsChecked;
@@ -189,7 +170,6 @@ namespace _1_1EX
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
             
-            dodajResursFormReset();
             MessageBox.Show("Resource with id " + index + " has been modifyed!");
             MainWindow.resursi[index] = resurs;
             mw.ucitajResurse();
@@ -216,16 +196,15 @@ namespace _1_1EX
             id.Text = r.Id;
             ime.Text = r.Ime;
             opis.Text = r.Opis;
+            MessageBox.Show(r.Cena.ToString());
             resurs.Ikonica = r.Ikonica;
+            
             //setovat frekvenciju u combo box
 
             obnovljiv.IsChecked = r.Obnovljiv;
             vaznost.IsChecked = r.Vaznost;
             eksploatacija.IsChecked = r.Eksploatacija;
             cena.Text = (r.Cena).ToString();
-
-
-            
 
         }
 
