@@ -23,6 +23,8 @@ namespace _1_1EX
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        //slika koja se dreguje
+        Image drag_image=null;
 
         //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
         public static string active_map;
@@ -130,6 +132,7 @@ namespace _1_1EX
                     cm.Items.Add(modMenuItem);
                     cm.Items.Add(delMenuItem);
                     carImg[i].ContextMenu = cm;
+                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index]);
                 }
 
                 carImg[i].Width = 40;
@@ -151,6 +154,50 @@ namespace _1_1EX
             }
 
         }
+
+        private void startDrag(Image i)
+        {
+            drag_image = new Image();
+            drag_image.Source = i.Source;
+            drag_image.Height = 30;
+            drag_image.Width = 30;
+            // Initialize the drag & drop operation
+            mapa.Children.Add(drag_image);
+            
+
+            DragDrop.DoDragDrop(this, i, DragDropEffects.Move);
+           
+        }
+
+        private void Canvas_StartDrag(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Image)
+            {
+                mapa.CaptureMouse();
+               
+                    
+                    drag_image = e.OriginalSource as Image;
+                    DragDrop.DoDragDrop(this, drag_image, DragDropEffects.Move );
+                
+            }
+        }
+
+        private void Canvas_Drop(object sender, DragEventArgs e)
+        {
+
+
+             
+                Point point = new Point();
+                point = e.GetPosition(mapa);
+                Canvas.SetLeft(drag_image, point.X);
+                Canvas.SetTop(drag_image, point.Y);
+                
+               
+
+                drag_image = null;
+        }
+
+        
 
         private void modifyResourceAction(int i)
         {

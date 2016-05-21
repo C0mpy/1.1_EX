@@ -144,8 +144,10 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-
-        <Image x:Name="image" Source="map.jpg"/>
-                      
+        <Canvas Name="mapa" AllowDrop="True"  MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+            <Canvas.Background>
+            <ImageBrush ImageSource="map.jpg"  />
+            </Canvas.Background>
+        </Canvas>              
     </DockPanel>
 </Window>
