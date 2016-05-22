@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Xml.Serialization;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using _1_1EX.Model;
 
 namespace _1_1EX
@@ -13,6 +14,21 @@ namespace _1_1EX
     //staticna klasa ~ ne instancira se samo pozoves Serializer.Write/Read
     static class Serializer
     {
+
+        public static void SaveMapModel()
+        {
+            WriteToXmlFile<List<MapModel>>(MainWindow.active_map + "_mapmodel.xml", MainWindow.map_model);
+        }
+
+        public static List<MapModel> LoadMapModel()
+        {
+            if (!File.Exists(MainWindow.active_map + "_mapmodel.xml"))
+            {
+                SaveMapModel();
+            }
+            return ReadFromXmlFile<List<MapModel>>(MainWindow.active_map + "_mapmodel.xml");
+        }
+
         public static void WriteResources()
         {
             WriteToXmlFile<List<Resurs>>(MainWindow.active_map + ".xml", MainWindow.resursi);
@@ -20,6 +36,10 @@ namespace _1_1EX
 
         public static List<Resurs> ReadResources()
         {
+            if (!File.Exists(MainWindow.active_map+".xml"))
+            {
+                WriteResources();
+            }
             return ReadFromXmlFile<List<Resurs>>(MainWindow.active_map+".xml");
         }
 
@@ -30,6 +50,9 @@ namespace _1_1EX
 
         public static ObservableCollection<TipResursa> LoadTip()
         {
+            if (!File.Exists("tipresursa.xml")){
+                SaveTip();
+            }
             return ReadFromXmlFile<ObservableCollection<TipResursa>>("tipresursa.xml");
         }
 
@@ -40,9 +63,14 @@ namespace _1_1EX
 
         public static ObservableCollection<Etiketa> LoadEtiketa()
         {
+            if (!File.Exists("etiketa.xml"))
+            {
+                SaveEtiketa();
+            }
             return ReadFromXmlFile<ObservableCollection<Etiketa>>("etiketa.xml");
         }
 
+       
 
         private static void WriteToXmlFile<T>(string path, T data) where T : new()
         {

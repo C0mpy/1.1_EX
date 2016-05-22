@@ -15,6 +15,9 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using _1_1EX.Model;
 using Microsoft.Win32;
+using System.Windows.Markup;
+using System.IO;
+using System.Xml;
 
 namespace _1_1EX
 {
@@ -25,10 +28,14 @@ namespace _1_1EX
     {
         //slika koja se dreguje
         Image drag_image=null;
+        string drag_res_id = null;
+        string drag_res_path = null;
 
         //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
         public static string active_map;
-        
+
+        public static List<MapModel> map_model = new List<MapModel>();
+
         //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
         public static List<Resurs> resursi = new List<Resurs>();
 
@@ -60,7 +67,7 @@ namespace _1_1EX
             ucitajResurse();
             picker.SelectedDate = DateTime.Today;
 
-             
+            loadMapContent();
         }
 
 
@@ -132,7 +139,7 @@ namespace _1_1EX
                     cm.Items.Add(modMenuItem);
                     cm.Items.Add(delMenuItem);
                     carImg[i].ContextMenu = cm;
-                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index]);
+                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],resursi[index].Id,resursi[index].Ikonica);
                 }
 
                 carImg[i].Width = 40;
@@ -155,33 +162,52 @@ namespace _1_1EX
 
         }
 
-        private void startDrag(Image i)
+        //pocni drag sa liste resursa
+        private void startDrag(Image img,string id,string path)
         {
+            drag_res_path = path;
+            drag_res_id = id;
             drag_image = new Image();
-            drag_image.Source = i.Source;
+            drag_image.Source = img.Source;
             drag_image.Height = 30;
             drag_image.Width = 30;
             // Initialize the drag & drop operation
             mapa.Children.Add(drag_image);
             
 
-            DragDrop.DoDragDrop(this, i, DragDropEffects.Move);
+            DragDrop.DoDragDrop(this, img, DragDropEffects.Move);
            
         }
-
+        //pocni drag na kanvasu
         private void Canvas_StartDrag(object sender, MouseButtonEventArgs e)
         {
             if (e.OriginalSource is Image)
             {
-                mapa.CaptureMouse();
-               
-                    
+                    mapa.CaptureMouse();
+                    Point point = new Point();
+                    point = e.GetPosition(mapa);
+
+                    //model for deletion
+                    MapModel del = null; 
+
+                    foreach (MapModel m in map_model)
+                    {
+                        if ((m.Top < point.Y && m.Top+30>point.Y)&& ( m.Left < point.X && m.Left +30>point.X))
+                        {
+                            drag_res_id = m.Resource_id;
+                            drag_res_path = m.Img_path;
+                            del = m;
+                        }
+                    }
+
+                    map_model.Remove(del);
+
                     drag_image = e.OriginalSource as Image;
                     DragDrop.DoDragDrop(this, drag_image, DragDropEffects.Move );
                 
             }
         }
-
+        //dropaj na kanvas
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
 
@@ -191,13 +217,51 @@ namespace _1_1EX
                 point = e.GetPosition(mapa);
                 Canvas.SetLeft(drag_image, point.X);
                 Canvas.SetTop(drag_image, point.Y);
-                
-               
+
+                //save map content
+                map_model.Add(new MapModel(drag_res_id,point.Y,point.X,drag_res_path));
+                Serializer.SaveMapModel();
 
                 drag_image = null;
+                drag_res_id = null;
+                drag_res_path = null;
+                
+              
         }
 
-        
+        private void Canvas_DragOver(object sender, DragEventArgs e)
+        {
+           
+            Point point = new Point();
+            point = e.GetPosition(mapa);
+            Canvas.SetLeft(drag_image, point.X);
+            Canvas.SetTop(drag_image, point.Y);
+
+           
+
+        }
+
+       
+
+        private void loadMapContent()
+        {
+
+            map_model=Serializer.LoadMapModel();
+
+            mapa.Children.Clear();
+
+            foreach (MapModel e in map_model)
+            {
+                Image img = new Image();
+                img.Source = new BitmapImage(new Uri(e.Img_path, UriKind.RelativeOrAbsolute));
+                img.Height = 30;
+                img.Width = 30;
+                Canvas.SetLeft(img,e.Left);
+                Canvas.SetTop(img, e.Top);
+                mapa.Children.Add(img);
+            }
+
+        }
 
         private void modifyResourceAction(int i)
         {

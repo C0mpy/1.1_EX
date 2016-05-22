@@ -144,7 +144,7 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <Canvas Name="mapa" AllowDrop="True"  MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+        <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
             <Canvas.Background>
             <ImageBrush ImageSource="map.jpg"  />
             </Canvas.Background>
