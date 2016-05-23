@@ -26,10 +26,12 @@ namespace _1_1EX
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        //slika koja se dreguje
+        //za drag
         Image drag_image=null;
         string drag_res_id = null;
         string drag_res_path = null;
+        Point drag_from = new Point(-1,-1);
+        //
 
         //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
         public static string active_map;
@@ -197,11 +199,13 @@ namespace _1_1EX
                             drag_res_id = m.Resource_id;
                             drag_res_path = m.Img_path;
                             del = m;
+                            drag_from.X = m.Left;
+                            drag_from.Y = m.Top;
                         }
                     }
 
                     map_model.Remove(del);
-
+                   
                     drag_image = e.OriginalSource as Image;
                     DragDrop.DoDragDrop(this, drag_image, DragDropEffects.Move );
                 
@@ -211,21 +215,41 @@ namespace _1_1EX
         private void Canvas_Drop(object sender, DragEventArgs e)
         {
 
-
-             
                 Point point = new Point();
                 point = e.GetPosition(mapa);
-                Canvas.SetLeft(drag_image, point.X);
-                Canvas.SetTop(drag_image, point.Y);
 
-                //save map content
-                map_model.Add(new MapModel(drag_res_id,point.Y,point.X,drag_res_path));
-                Serializer.SaveMapModel();
+                //proveri dal se preklapaju
+                bool can_drop = true;
+                foreach (MapModel m in map_model)
+                {
+                    if ((m.Top < point.Y && m.Top + 30 > point.Y) && (m.Left < point.X && m.Left + 30 > point.X))
+                    {
+                        can_drop = false;
+                    }
+                }
 
+               //za dregovanje sa mape
+                if (!can_drop)
+                    point = drag_from;
+                //za dregovanje sa grida
+                if (point.X == -1)
+                    point=new Point(0,0);
+                
+                    Canvas.SetLeft(drag_image, point.X);
+                    Canvas.SetTop(drag_image, point.Y);
+
+                    //save map content
+                    map_model.Add(new MapModel(drag_res_id, point.Y, point.X, drag_res_path));
+                    Serializer.SaveMapModel();
+                
+
+                //reset
                 drag_image = null;
                 drag_res_id = null;
                 drag_res_path = null;
-                
+                drag_from.X = -1;
+                drag_from.Y = -1;
+            
               
         }
 

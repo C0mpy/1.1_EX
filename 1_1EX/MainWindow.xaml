@@ -144,10 +144,15 @@
                 </StackPanel>
             </Expander>
         </StackPanel>
-        <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
-            <Canvas.Background>
-            <ImageBrush ImageSource="map.jpg"  />
-            </Canvas.Background>
-        </Canvas>              
+        <TabControl>
+            <TabItem Header="untitled">
+              
+                <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+                    <Canvas.Background>
+                        <ImageBrush ImageSource="map.jpg"  />
+                    </Canvas.Background>
+                </Canvas>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>
