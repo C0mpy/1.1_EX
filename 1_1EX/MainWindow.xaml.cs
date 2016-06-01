@@ -289,8 +289,7 @@ namespace _1_1EX
 
         private void modifyResourceAction(int i)
         {
-            WinResurs wr = new WinResurs();
-            wr.setData(this, resursi[i], i);
+            WinResurs wr = new WinResurs(this, resursi[i]);
             wr.Show();
         }
 
@@ -451,12 +450,6 @@ namespace _1_1EX
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
             resursi.Add(resurs);
-
-            MessageBox.Show(resursi.Count.ToString());
-            for (int i = 0; i < resursi.Count; i++)
-            {
-                MessageBox.Show(resursi.ElementAt(i).ToString());
-            }
 
             ucitajResurse();
             Serializer.WriteResources();

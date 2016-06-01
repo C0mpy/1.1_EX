@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using _1_1EX.Model;
+using Microsoft.Win32;
 
 namespace _1_1EX
 {
@@ -23,12 +24,8 @@ namespace _1_1EX
     public partial class WinResurs : Window, INotifyPropertyChanged
     {
 
-        //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
-        public static string active_map;
-
-        //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
-        public int index;
         public MainWindow mw;
+        public Resurs backup;
 
         public static ObservableCollection<TipResursa> types
         {
@@ -42,18 +39,60 @@ namespace _1_1EX
             set;
         }
 
-        public WinResurs()
+        public WinResurs(MainWindow mwin, Resurs r)
         {
             InitializeComponent();
             this.DataContext = this;
-            resurs = new Resurs();
-            types = Serializer.LoadTip();
-            tags = Serializer.LoadEtiketa();
-            picker.SelectedDate = DateTime.Today;
+            resurs = r;
+            tags = MainWindow.tags;
+            types = MainWindow.types;
+            mw = mwin;
+            id.Text = r.Id;
+            ime.Text = r.Ime;
+            opis.Text = r.Opis;
+            //setovat frekvenciju u combobox
+            if (r.Frekvencija1.ToString() == "Rare")
+            {
+                frekvencija.SelectedIndex = 0;
+            }
+            else if (r.Frekvencija1.ToString() == "Common")
+            {
+                frekvencija.SelectedIndex = 1;
+            }
+            else if (r.Frekvencija1.ToString() == "Universal")
+            {
+                frekvencija.SelectedIndex = 2;
+            }
+            obnovljiv.IsChecked = r.Obnovljiv;
+            vaznost.IsChecked = r.Vaznost;
+            eksploatacija.IsChecked = r.Eksploatacija;
+            if (r.Mera1.ToString() == "Scoop")
+            {
+                mera.SelectedIndex = 0;
+            }
+            else if (r.Mera1.ToString() == "Barrel")
+            {
+                mera.SelectedIndex = 1;
+            }
+            else if (r.Mera1.ToString() == "Ton")
+            {
+                mera.SelectedIndex = 2;
+            }
+            else if (r.Mera1.ToString() == "Kilogram")
+            {
+                mera.SelectedIndex = 3;
+            }
+            cena.Text = (r.Cena).ToString();
+
+            backup = new Resurs(r.Id, r.Ime, r.Opis, r.Tip, r.Frekvencija1, r.Ikonica, r.Obnovljiv, r.Vaznost,
+                r.Eksploatacija, r.Mera1, r.Cena, r.Datum, r.Etikete1);
+            MessageBox.Show(resurs.ToString());
+            removeResourceFromList();
+            picker.SelectedDate = r.Datum;
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
-       
-
+      
         private void DatePicker_SelectedDateChanged(object sender,
         SelectionChangedEventArgs e)
         {
@@ -82,7 +121,7 @@ namespace _1_1EX
         private void title(object sender,
         ContextMenuEventArgs e)
         {
-            this.Title = "das";
+            this.Title = "Modify Resource";
 
         }
 
@@ -149,31 +188,24 @@ namespace _1_1EX
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        void dodaj_Click(object sender, RoutedEventArgs e)
+        private void odaberiIkonicu(object sender, RoutedEventArgs e)
         {
-            if (resurs.Id == "" || resurs.Ime == "")
-            {
-                id.Text = "1";
-                id.Text = "";
-                ime.Text = "1";
-                ime.Text = "";
-                return;
-            }
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpeg|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
 
-            resurs.Ime = ime.Text;
-            resurs.Opis = opis.Text;
-            resurs.Frekvencija1 = (Frekvencija)Enum.Parse(typeof(Frekvencija), frekvencija.Text);
-            resurs.Ikonica = "ikonica";
-            resurs.Obnovljiv = (bool)obnovljiv.IsChecked;
-            resurs.Vaznost = (bool)vaznost.IsChecked;
-            resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
-            resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
-            resurs.Datum = (DateTime)picker.SelectedDate;
-            
-            MessageBox.Show("Resource with id " + index + " has been modifyed!");
-            MainWindow.resursi[index] = resurs;
-            mw.ucitajResurse();
-            Serializer.WriteResources();
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = openFileDialog.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = openFileDialog.FileName;
+                //string startupPath = Environment.CurrentDirectory;
+                //System.IO.File.Copy(filename, startupPath.Substring(0, startupPath.Length - 9) + "SlikeResursi\\" + System.IO.Path.GetFileName(filename));
+                resurs.Ikonica = filename;
+            }
         }
 
         private void EtiketaClick(object sender, RoutedEventArgs e)
@@ -188,24 +220,49 @@ namespace _1_1EX
             ew.Show();
         }
 
-        public void setData(MainWindow mwin, Resurs r, int i) {
+        public void removeResourceFromList()
+        {
+            for (int i = 0; i < MainWindow.resursi.Count; i++)
+            {
+                if (backup.Id == MainWindow.resursi[i].Id)
+                {
+                    MainWindow.resursi.RemoveAt(i);
+                    break;
+                }
+            }
+        }
 
-            mw = mwin;
-            index = i;
-            
-            id.Text = r.Id;
-            ime.Text = r.Ime;
-            opis.Text = r.Opis;
-            MessageBox.Show(r.Cena.ToString());
-            resurs.Ikonica = r.Ikonica;
-            
-            //setovat frekvenciju u combo box
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.resursi.Add(backup);
+            this.Close();
+        }
 
-            obnovljiv.IsChecked = r.Obnovljiv;
-            vaznost.IsChecked = r.Vaznost;
-            eksploatacija.IsChecked = r.Eksploatacija;
-            cena.Text = (r.Cena).ToString();
+        void modify_Click(object sender, RoutedEventArgs e)
+        {
+            if (resurs.Id == "" || resurs.Ime == "")
+            {
+                id.Text = "1";
+                id.Text = "";
+                ime.Text = "1";
+                ime.Text = "";
+                return;
+            }
 
+            resurs.Ime = ime.Text;
+            resurs.Opis = opis.Text;
+            resurs.Frekvencija1 = (Frekvencija)Enum.Parse(typeof(Frekvencija), frekvencija.Text);
+            resurs.Obnovljiv = (bool)obnovljiv.IsChecked;
+            resurs.Vaznost = (bool)vaznost.IsChecked;
+            resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
+            resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
+            resurs.Datum = (DateTime)picker.SelectedDate;
+
+            MainWindow.resursi.Add(resurs);
+            MessageBox.Show("Resource has been modifyed!");
+            mw.ucitajResurse();
+            Serializer.WriteResources();
+            this.Close();
         }
 
     }

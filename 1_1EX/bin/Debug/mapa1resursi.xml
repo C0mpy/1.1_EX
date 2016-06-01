@@ -1,23 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfResurs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Resurs>
-    <Etikete1 />
-    <Datum>2016-05-18T00:00:00+02:00</Datum>
+    <Etikete1>
+      <Etiketa>
+        <Boja>
+          <A>255</A>
+          <R>220</R>
+          <G>20</G>
+          <B>60</B>
+          <ScA>1</ScA>
+          <ScR>0.7156935</ScR>
+          <ScG>0.00699541</ScG>
+          <ScB>0.045186203</ScB>
+        </Boja>
+        <Opis>tag2</Opis>
+        <Id>tag2</Id>
+      </Etiketa>
+    </Etikete1>
+    <Datum>2016-05-21T00:00:00+02:00</Datum>
     <Tip>
-      <Id />
-      <Ime />
-      <Ikonica />
-      <Opis />
+      <Id>3</Id>
+      <Ime>3</Ime>
+      <Ikonica>icon</Ikonica>
+      <Opis>3</Opis>
     </Tip>
-    <Mera1>Scoop</Mera1>
-    <Frekvencija1>Rare</Frekvencija1>
-    <Cena>123</Cena>
+    <Mera1>Kilogram</Mera1>
+    <Frekvencija1>Universal</Frekvencija1>
+    <Cena>1</Cena>
     <Eksploatacija>false</Eksploatacija>
     <Vaznost>true</Vaznost>
     <Obnovljiv>true</Obnovljiv>
-    <Ikonica>C:\Users\Dark ChestOf Wonders\Desktop\unnamed.png</Ikonica>
-    <Opis>i</Opis>
-    <Ime>i</Ime>
-    <Id>ifea</Id>
+    <Ikonica>C:\Users\Dark ChestOf Wonders\Desktop\15-03-13-14-25_0_large_hotlinemiami2.jpg</Ikonica>
+    <Opis>desc</Opis>
+    <Ime>name</Ime>
+    <Id>id</Id>
   </Resurs>
 </ArrayOfResurs>

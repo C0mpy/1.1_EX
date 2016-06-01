@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:_1_1EX"
         Title="Modify Resource"  mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="608" Width="419"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="514" Width="300"
         ResizeMode="NoResize">
     <StackPanel Orientation="Vertical">
-        
-        <Grid Width="376">
+
+        <Grid Margin="0,0,5,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -25,22 +25,22 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="186" />
+                <ColumnDefinition Width="14*" />
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Id:"/>
-            <TextBox x:Name="id" Grid.Row="0" Grid.Column="1" Margin="3" IsEnabled="False">
+            <TextBox x:Name="id" Grid.Column="1" Margin="0,3,0,3" Grid.ColumnSpan="2">
                 
             </TextBox>
             <!--Labela u kojoj se prikazuje greska-->
-            <Label Grid.Row="1" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=id, Path=(Validation.Errors)[0].ErrorContent}"></Label>
+            <Label Grid.Row="1" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=id, Path=(Validation.Errors)[0].ErrorContent}" Grid.ColumnSpan="2"></Label>
 
             <Label Grid.Row="2" Grid.Column="0" Content="Name:"/>
-            <TextBox x:Name="ime" Grid.Row="2" Grid.Column="1" Margin="3">
+            <TextBox x:Name="ime" Grid.Row="2" Grid.Column="1" Margin="0,3,0,3" Grid.ColumnSpan="2">
                 <TextBox.Text>
                     <Binding Path="Ime" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -50,34 +50,34 @@
                 </TextBox.Text>
             </TextBox>
             <!--Labela u kojoj se prikazuje greska-->
-            <Label Grid.Row="3" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=ime, Path=(Validation.Errors)[0].ErrorContent}"></Label>
+            <Label Grid.Row="3" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=ime, Path=(Validation.Errors)[0].ErrorContent}" Grid.ColumnSpan="2"></Label>
 
             <Label Grid.Row="4" Grid.Column="0" Content="Description:"/>
-            <TextBox x:Name="opis" Grid.Row="4" Grid.Column="1" Margin="3" MinHeight="70" AcceptsReturn="True" TextWrapping="Wrap"/>
+            <TextBox x:Name="opis" Grid.Row="4" Grid.Column="1" Margin="0,3,0,3" MinHeight="70" AcceptsReturn="True" TextWrapping="Wrap" Grid.ColumnSpan="2" />
 
-            <Label Grid.Row="5" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Type:"/>
+            <Label Grid.Row="5" Grid.Column="0" Margin="0,5,0,5" Content="Type:"/>
             <!--TODO Event na klik dugmeta za odabir/pravljenje tipa resursa-->
             <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" 
-                         MinWidth="80" Margin="0, 5, 0 , 5" Content="   Select/Create...   " Click="TypeClick" />
+                         MinWidth="80" Margin="0,5,0,5" Content="   Select/Create...   " Click="TypeClick" Width="100" Grid.ColumnSpan="2" />
 
             <Label Grid.Row="6" Grid.Column="0" Content="Frequency:"/>
-            <ComboBox x:Name="frekvencija" Grid.Row="6" Grid.Column="1">
-                <ComboBoxItem IsSelected="True">Rare</ComboBoxItem>
+            <ComboBox x:Name="frekvencija" Grid.Row="6" Grid.Column="1" Margin="0,0,0,0" Grid.ColumnSpan="2">
+                <ComboBoxItem>Rare</ComboBoxItem>
                 <ComboBoxItem>Common</ComboBoxItem>
                 <ComboBoxItem>Universal</ComboBoxItem>
             </ComboBox>
 
-            <Label Grid.Row="7" Grid.Column="0" Margin="0, 5, 0 , 5" Content="Icon:"/>
+            <Label Grid.Row="7" Grid.Column="0" Margin="0,5,0,5" Content="Icon:"/>
             <!--TODO Event za odabir ikonice-->
-            <Button x:Name="ikonica" Grid.Row="7" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right" 
-                         MinWidth="80" Content="   Browse...   "  />
+            <Button x:Name="ikonica" Grid.Row="7" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" 
+                         MinWidth="80" Content="   Browse...   " Width="80" Grid.ColumnSpan="2"  Click="odaberiIkonicu" />
 
-            <CheckBox x:Name="obnovljiv" Grid.Row="8" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Renewable Resource</CheckBox>
-            <CheckBox x:Name="vaznost" Grid.Row="9" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Strategic Importance</CheckBox>
-            <CheckBox x:Name="eksploatacija" Grid.Row="10" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Exploitable</CheckBox>
+            <CheckBox x:Name="obnovljiv" Grid.Row="8" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" Width="127" Grid.ColumnSpan="2">Renewable Resource</CheckBox>
+            <CheckBox x:Name="vaznost" Grid.Row="9" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" Width="130" Grid.ColumnSpan="2">Strategic Importance</CheckBox>
+            <CheckBox x:Name="eksploatacija" Grid.Row="10" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" Width="78" Grid.ColumnSpan="2">Exploitable</CheckBox>
 
             <Label Grid.Row="11" Grid.Column="0" Content="Measure:"/>
-            <ComboBox x:Name="mera" Grid.Row="11" Grid.Column="1">
+            <ComboBox x:Name="mera" Grid.Row="11" Grid.Column="1" Margin="0,0,0,0" Grid.ColumnSpan="2">
                 <ComboBoxItem IsSelected="True">Scoop</ComboBoxItem>
                 <ComboBoxItem>Barrel</ComboBoxItem>
                 <ComboBoxItem>Ton</ComboBoxItem>
@@ -85,7 +85,7 @@
             </ComboBox>
 
             <Label Grid.Row="12" Grid.Column="0" Content="Price($):"/>
-            <TextBox Grid.Row="12" Grid.Column="1" x:Name="cena" Margin="0, 5, 0, 0">
+            <TextBox Grid.Row="12" Grid.Column="1" x:Name="cena" Margin="0,5,0,0" Grid.ColumnSpan="2">
                 <TextBox.Text>
                     <Binding Path="Cena" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -95,20 +95,34 @@
                 </TextBox.Text>
             </TextBox>
             <!--Labela u kojoj se prikazuje greska-->
-            <Label Grid.Row="13" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=cena, Path=(Validation.Errors)[0].ErrorContent}"></Label>
+            <Label Grid.Row="13" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=cena, Path=(Validation.Errors)[0].ErrorContent}" Grid.ColumnSpan="2"></Label>
 
-            <Label Grid.Row="14" Grid.Column="0" Margin="0, 0, 0, 5" Content="Discovery Date:"/>
+            <Label Grid.Row="14" Grid.Column="0" Margin="0,0,0,5" Content="Discovery Date:"/>
             <DatePicker x:Name="picker" Grid.Row="14" Grid.Column="1" HorizontalAlignment="Right"
-		                    Margin="0, 0, 0 , 5" VerticalAlignment="Top"
-		                    SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+		                    Margin="0,1,0,0" VerticalAlignment="Top"
+		                    SelectedDateChanged="DatePicker_SelectedDateChanged" Grid.ColumnSpan="2" />
 
-            <Label Grid.Row="15" Grid.Column="0" Margin="0, 0, 0 , 5" Content="Tags:"/>
+            <Label Grid.Row="15" Grid.Column="0" Margin="0,0,0,5" Content="Tags:"/>
             <!--Event za odabir/izradu etikete-->
-            <Button x:Name="etiketeButton" Grid.Row="15" Grid.Column="1" Margin="0, 0, 0 , 5" HorizontalAlignment="Right" 
-                         MinWidth="80" Content="   Select/Create...   " Click="EtiketaClick" />
-
-            <Button Grid.Row="16" Grid.Column="1" x:Name="dodajButton" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
-                         MinWidth="120" MinHeight="25" Content="   Modify" Click="dodaj_Click">
+            <Button x:Name="etiketeButton" Grid.Row="15" Grid.Column="1" Margin="0,2,0,3" HorizontalAlignment="Right" 
+                         MinWidth="80" Content="   Select/Create...   " Click="EtiketaClick" Grid.ColumnSpan="2" />
+        </Grid>
+        <Grid Margin="5,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="69" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="66*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="dodajButton" HorizontalAlignment="Left" 
+                         MinWidth="120" MinHeight="25" Content="Modify" Click="modify_Click" Width="130" Margin="0,3,0,2" Grid.ColumnSpan="2">
                 <Button.Style>
                     <!--Disableuje button ako validator nadje gresku -->
                     <Style TargetType="{x:Type Button}">
@@ -117,7 +131,7 @@
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding ElementName=cena, Path=(Validation.HasError)}" Value="false" />
-                                    
+
                                     <Condition Binding="{Binding ElementName=ime, Path=(Validation.HasError)}" Value="false" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="true" />
@@ -126,6 +140,7 @@
                     </Style>
                 </Button.Style>
             </Button>
+            <Button x:Name="cancelButton" HorizontalAlignment="Right" MinWidth="120" Width="130" MinHeight="25" Content="Cancel" Grid.Column="3" Height="25" Grid.ColumnSpan="2" Margin="0,2" Click="cancelButton_Click"></Button>
         </Grid>
     </StackPanel>
 </Window>
