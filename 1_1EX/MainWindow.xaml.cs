@@ -28,8 +28,8 @@ namespace _1_1EX
     {
         //za drag
         Image drag_image=null;
-        string drag_res_id = null;
-        string drag_res_path = null;
+        
+        Resurs drag_res = null;
         Point drag_from = new Point(-1,-1);
         //
 
@@ -141,7 +141,7 @@ namespace _1_1EX
                     cm.Items.Add(modMenuItem);
                     cm.Items.Add(delMenuItem);
                     carImg[i].ContextMenu = cm;
-                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],resursi[index].Id,resursi[index].Ikonica);
+                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],resursi[index]);
                 }
 
                 carImg[i].Width = 40;
@@ -165,10 +165,10 @@ namespace _1_1EX
         }
 
         //pocni drag sa liste resursa
-        private void startDrag(Image img,string id,string path)
+        private void startDrag(Image img,Resurs res)
         {
-            drag_res_path = path;
-            drag_res_id = id;
+            drag_res = res;
+           
             drag_image = new Image();
             drag_image.Source = img.Source;
             drag_image.Height = 30;
@@ -196,8 +196,7 @@ namespace _1_1EX
                     {
                         if ((m.Top < point.Y && m.Top+30>point.Y)&& ( m.Left < point.X && m.Left +30>point.X))
                         {
-                            drag_res_id = m.Resource_id;
-                            drag_res_path = m.Img_path;
+                            drag_res = m.Res;
                             del = m;
                             drag_from.X = m.Left;
                             drag_from.Y = m.Top;
@@ -239,14 +238,14 @@ namespace _1_1EX
                     Canvas.SetTop(drag_image, point.Y);
 
                     //save map content
-                    map_model.Add(new MapModel(drag_res_id, point.Y, point.X, drag_res_path));
+                    map_model.Add(new MapModel( point.Y, point.X, drag_res));
                     Serializer.SaveMapModel();
                 
 
                 //reset
                 drag_image = null;
-                drag_res_id = null;
-                drag_res_path = null;
+                
+                drag_res= null;
                 drag_from.X = -1;
                 drag_from.Y = -1;
             
@@ -265,7 +264,10 @@ namespace _1_1EX
 
         }
 
-       
+        private void Map_Filter(object sender, EventArgs e)
+        {
+
+        }
 
         private void loadMapContent()
         {
@@ -277,7 +279,7 @@ namespace _1_1EX
             foreach (MapModel e in map_model)
             {
                 Image img = new Image();
-                img.Source = new BitmapImage(new Uri(e.Img_path, UriKind.RelativeOrAbsolute));
+                img.Source = new BitmapImage(new Uri(e.Res.Ikonica, UriKind.RelativeOrAbsolute));
                 img.Height = 30;
                 img.Width = 30;
                 Canvas.SetLeft(img,e.Left);

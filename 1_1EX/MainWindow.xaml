@@ -143,16 +143,14 @@
                     </Grid>
                 </StackPanel>
             </Expander>
+            <TextBox Height="23" Name="textBox1" Width="120" KeyDown="Map_Filter" />
         </StackPanel>
-        <TabControl>
-            <TabItem Header="untitled">
-              
-                <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
-                    <Canvas.Background>
-                        <ImageBrush ImageSource="map.jpg"  />
-                    </Canvas.Background>
-                </Canvas>
-            </TabItem>
-        </TabControl>
+        
+           
+            <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+               <Canvas.Background>
+                    <ImageBrush ImageSource="map.jpg"  />
+               </Canvas.Background>
+        </Canvas>
     </DockPanel>
 </Window>

@@ -7,27 +7,27 @@ namespace _1_1EX.Model
 {
     public class MapModel
     {
-        string resource_id;
+        
         double top;
         double left;
-        string img_path;
+        Resurs res;
 
 
 
         public  MapModel() { }
 
-        public MapModel(string id, double t, double l, string path)
+        public MapModel( double t, double l, Resurs r)
         {
-            resource_id = id;
+            res = r;
             top = t;
             left = l;
-            img_path = path;
+           
         }
 
-        public string Resource_id
+        public Resurs Res
         {
-            get { return resource_id; }
-            set { resource_id = value; }
+            get { return res; }
+            set { res = value; }
         }
 
         public double Top
@@ -42,11 +42,7 @@ namespace _1_1EX.Model
             set { left = value; }
         }
 
-        public string Img_path
-        {
-            get { return img_path; }
-            set { img_path = value; }
-        }
+        
 
     }
 }
