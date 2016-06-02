@@ -68,7 +68,8 @@ namespace _1_1EX
             resursi = Serializer.ReadResources();
             ucitajResurse();
             picker.SelectedDate = DateTime.Today;
-
+           
+            frekvencija_q.SelectedIndex = 0; //hack
             loadMapContent();
         }
 
@@ -167,18 +168,32 @@ namespace _1_1EX
         //pocni drag sa liste resursa
         private void startDrag(Image img,Resurs res)
         {
-            drag_res = res;
-           
-            drag_image = new Image();
-            drag_image.Source = img.Source;
-            drag_image.Height = 30;
-            drag_image.Width = 30;
-            // Initialize the drag & drop operation
-            mapa.Children.Add(drag_image);
-            
+            bool can_drag = true;
+            foreach (MapModel mm in map_model)
+            {
+                if (mm.Res.Id.Equals(res.Id))
+                    can_drag = false;
+            }
 
-            DragDrop.DoDragDrop(this, img, DragDropEffects.Move);
-           
+            if (can_drag)
+            {
+
+                drag_res = res;
+
+                drag_image = new Image();
+                drag_image.Source = img.Source;
+                drag_image.Height = 30;
+                drag_image.Width = 30;
+                // Initialize the drag & drop operation
+                mapa.Children.Add(drag_image);
+
+
+                DragDrop.DoDragDrop(this, img, DragDropEffects.Move);
+            }
+            else
+            {
+                MessageBox.Show("This resource already exists on map.");
+            }
         }
         //pocni drag na kanvasu
         private void Canvas_StartDrag(object sender, MouseButtonEventArgs e)
@@ -266,6 +281,63 @@ namespace _1_1EX
 
         private void Map_Filter(object sender, EventArgs e)
         {
+            //filtrirani mapmodel
+            List<MapModel> filter_result = new List<MapModel>();
+
+
+            //pokupi sve uslove
+            string name_query = textBox1.Text;
+
+            
+            bool obnovljivv = (bool) obnovljiv_q.IsChecked;
+            bool vazno = (bool)vaznost_q.IsChecked;
+            bool eksploat = (bool)eksploatacija_q.IsChecked;
+
+            string freq = ((ComboBoxItem)frekvencija_q.SelectedItem).Content.ToString();
+            
+
+            //
+            mapa.Children.Clear();
+            
+            //filter//sve u jednoj iteraciji?
+            foreach (MapModel mm in map_model)
+            {
+                bool ok = true;
+
+                //name filter
+                if (!mm.Res.Ime.ToLower().Contains(name_query.ToLower()))
+                    ok = false;
+                
+                //ove filter
+                if (obnovljivv)
+                    if (!mm.Res.Obnovljiv)
+                        ok = false;
+                if (vazno)
+                    if (!mm.Res.Vaznost)
+                        ok = false;
+                if (eksploat)
+                    if (!mm.Res.Eksploatacija)
+                        ok = false;
+
+                //frekvencija filter
+                if (freq != "All" )
+                    if (mm.Res.Frekvencija1.ToString() != freq)
+                        ok = false;
+
+                if(ok)
+                    filter_result.Add(mm);
+            }
+
+            foreach (MapModel fmm in filter_result)
+            {
+                Image img = new Image();
+                img.Source = new BitmapImage(new Uri(fmm.Res.Ikonica, UriKind.RelativeOrAbsolute));
+                img.Height = 30;
+                img.Width = 30;
+                Canvas.SetLeft(img, fmm.Left);
+                Canvas.SetTop(img, fmm.Top);
+                mapa.Children.Add(img);
+            }
 
         }
 
