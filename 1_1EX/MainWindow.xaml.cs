@@ -68,8 +68,16 @@ namespace _1_1EX
             resursi = Serializer.ReadResources();
             ucitajResurse();
             picker.SelectedDate = DateTime.Today;
-           
+            
+            //meci u funkciju kasnije da ne bude ruzno :S
             frekvencija_q.SelectedIndex = 0; //hack
+            type_q.Items.Add("All");
+            foreach (TipResursa t in types)
+            {
+                type_q.Items.Add(t.Ime);
+            }
+            type_q.SelectedIndex = 0;
+
             loadMapContent();
         }
 
@@ -285,18 +293,27 @@ namespace _1_1EX
             List<MapModel> filter_result = new List<MapModel>();
 
 
-            //pokupi sve uslove
+            //pokupi sve uslove/////////////////////////
             string name_query = textBox1.Text;
 
             
             bool obnovljivv = (bool) obnovljiv_q.IsChecked;
             bool vazno = (bool)vaznost_q.IsChecked;
             bool eksploat = (bool)eksploatacija_q.IsChecked;
+           
+            string   freq = ((ComboBoxItem)frekvencija_q.SelectedItem).Content.ToString();
+            string ty = "All";
+            try
+            {
+                ty =(string) type_q.SelectedItem;
+            }
+            catch (Exception ee)
+            {
+                //nista jbg :/
+            }
+            //////////////////////////////////////////
 
-            string freq = ((ComboBoxItem)frekvencija_q.SelectedItem).Content.ToString();
-            
 
-            //
             mapa.Children.Clear();
             
             //filter//sve u jednoj iteraciji?
@@ -324,6 +341,11 @@ namespace _1_1EX
                     if (mm.Res.Frekvencija1.ToString() != freq)
                         ok = false;
 
+                //tip filter
+                if (ty != "All")
+                    if (mm.Res.Tip.Ime != ty)
+                        ok = false;
+
                 if(ok)
                     filter_result.Add(mm);
             }
@@ -339,6 +361,19 @@ namespace _1_1EX
                 mapa.Children.Add(img);
             }
 
+        }
+
+        private void Reset_Map_Filter(object sender, EventArgs e)
+        {
+
+
+            textBox1.Text = "";
+            obnovljiv_q.IsChecked = false;
+            vaznost_q.IsChecked = false;
+            eksploatacija_q.IsChecked = false;
+            frekvencija_q.SelectedIndex = 0;
+            type_q.SelectedIndex = 0;
+            loadMapContent();
         }
 
         private void loadMapContent()

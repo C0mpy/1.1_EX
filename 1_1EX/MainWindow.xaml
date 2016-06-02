@@ -4,6 +4,7 @@
         xmlns:src="clr-namespace:_1_1EX"
         Title="MainWindow" WindowState="Maximized" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="350" Width="525">
     <DockPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel DockPanel.Dock="Left" MinWidth="200">
             <Expander Margin="5" Padding="1" Header="Resources">
                 <Border x:Name="border" BorderBrush="SkyBlue" BorderThickness="1" Height="136">
@@ -144,8 +145,10 @@
                 </StackPanel>
             </Expander>
             <Expander Margin="5" Padding="1" Header="Map Filter">
-                <Grid>
+                <Grid >
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -172,11 +175,19 @@
                         <ComboBoxItem>Universal</ComboBoxItem>
                     </ComboBox>
 
+                    <Label Grid.Row="5" Grid.Column="0" Content="Type:"/>
+                    <ComboBox x:Name="type_q" Grid.Row="5" Grid.Column="1" SelectionChanged="Map_Filter" SelectedValuePath="Content"  />
+                  
+
+
+                    <Button Grid.Row="6" Grid.Column="1" x:Name="resetFilter" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
+                    MinWidth="120" MinHeight="25" Content="   Reset " Click="Reset_Map_Filter"/>
+
                 </Grid>
             </Expander>
             
         </StackPanel>
-        
+        </ScrollViewer>
            
             <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
                <Canvas.Background>
