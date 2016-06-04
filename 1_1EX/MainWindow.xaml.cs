@@ -26,6 +26,10 @@ namespace _1_1EX
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
+        Canvas c,c1,c2,c3,c4;
+       
+
         //za drag
         Image drag_image=null;
         
@@ -36,7 +40,7 @@ namespace _1_1EX
         //ako cemo imati vise mapa da ovde stoji ime aktivne mape?
         public static string active_map;
 
-        public static List<MapModel> map_model = new List<MapModel>();
+        public static Dictionary<string, List<MapModel>> map_model = new Dictionary<string, List<MapModel>>();
 
         //i mozda da cuvamo resurse za svaku mapu u hashmap gde je kljuc ime mape?
         public static List<Resurs> resursi = new List<Resurs>();
@@ -62,14 +66,18 @@ namespace _1_1EX
             InitializeComponent();
             this.DataContext = this;
             resurs = new Resurs();
-            active_map = "mapa1resursi";
+            active_map = "map1";
             types = Serializer.LoadTip();
             tags = Serializer.LoadEtiketa();
             resursi = Serializer.ReadResources();
             ucitajResurse();
             picker.SelectedDate = DateTime.Today;
-            
+
             //meci u funkciju kasnije da ne bude ruzno :S
+            {
+                c = mapa;
+            
+            }
             frekvencija_q.SelectedIndex = 0; //hack
             type_q.Items.Add("All");
             foreach (TipResursa t in types)
@@ -77,6 +85,11 @@ namespace _1_1EX
                 type_q.Items.Add(t.Ime);
             }
             type_q.SelectedIndex = 0;
+            map_model["map1"] = new List<MapModel>();
+            map_model["map2"] = new List<MapModel>();
+            map_model["map3"] = new List<MapModel>();
+            map_model["map4"] = new List<MapModel>();
+
 
             loadMapContent();
         }
@@ -228,7 +241,7 @@ namespace _1_1EX
         private void startDrag(Image img,Resurs res)
         {
             bool can_drag = true;
-            foreach (MapModel mm in map_model)
+            foreach (MapModel mm in map_model[active_map])
             {
                 if (mm.Res.Id.Equals(res.Id))
                     can_drag = false;
@@ -263,14 +276,14 @@ namespace _1_1EX
         {
             if (e.OriginalSource is Image)
             {
-                    mapa.CaptureMouse();
+                    c.CaptureMouse();
                     Point point = new Point();
                     point = e.GetPosition(mapa);
 
                     //model for deletion
                     MapModel del = null; 
 
-                    foreach (MapModel m in map_model)
+                    foreach (MapModel m in map_model[active_map])
                     {
                         if ((m.Top < point.Y && m.Top+30>point.Y)&& ( m.Left < point.X && m.Left +30>point.X))
                         {
@@ -281,7 +294,7 @@ namespace _1_1EX
                         }
                     }
 
-                    map_model.Remove(del);
+                    map_model[active_map].Remove(del);
                    
                     drag_image = e.OriginalSource as Image;
                     DragDrop.DoDragDrop(this, drag_image, DragDropEffects.Move );
@@ -293,11 +306,11 @@ namespace _1_1EX
         {
 
                 Point point = new Point();
-                point = e.GetPosition(mapa);
+                point = e.GetPosition(c);
 
                 //proveri dal se preklapaju
                 bool can_drop = true;
-                foreach (MapModel m in map_model)
+                foreach (MapModel m in map_model[active_map])
                 {
                     if ((m.Top < point.Y && m.Top + 30 > point.Y) && (m.Left < point.X && m.Left + 30 > point.X))
                     {
@@ -316,7 +329,7 @@ namespace _1_1EX
                     Canvas.SetTop(drag_image, point.Y);
 
                     //save map content
-                    map_model.Add(new MapModel( point.Y, point.X, drag_res));
+                    map_model[active_map].Add(new MapModel( point.Y, point.X, drag_res));
                     Serializer.SaveMapModel();
                 
 
@@ -369,40 +382,46 @@ namespace _1_1EX
             //////////////////////////////////////////
 
 
-            mapa.Children.Clear();
+            c.Children.Clear();
             
             //filter//sve u jednoj iteraciji?
-            foreach (MapModel mm in map_model)
+            try
             {
-                bool ok = true;
+                foreach (MapModel mm in map_model[active_map])
+                {
+                    bool ok = true;
 
-                //name filter
-                if (!mm.Res.Ime.ToLower().Contains(name_query.ToLower()))
-                    ok = false;
-                
-                //ove filter
-                if (obnovljivv)
-                    if (!mm.Res.Obnovljiv)
-                        ok = false;
-                if (vazno)
-                    if (!mm.Res.Vaznost)
-                        ok = false;
-                if (eksploat)
-                    if (!mm.Res.Eksploatacija)
+                    //name filter
+                    if (!mm.Res.Ime.ToLower().Contains(name_query.ToLower()))
                         ok = false;
 
-                //frekvencija filter
-                if (freq != "All" )
-                    if (mm.Res.Frekvencija1.ToString() != freq)
-                        ok = false;
+                    //ove filter
+                    if (obnovljivv)
+                        if (!mm.Res.Obnovljiv)
+                            ok = false;
+                    if (vazno)
+                        if (!mm.Res.Vaznost)
+                            ok = false;
+                    if (eksploat)
+                        if (!mm.Res.Eksploatacija)
+                            ok = false;
 
-                //tip filter
-                if (ty != "All")
-                    if (mm.Res.Tip.Ime != ty)
-                        ok = false;
+                    //frekvencija filter
+                    if (freq != "All")
+                        if (mm.Res.Frekvencija1.ToString() != freq)
+                            ok = false;
 
-                if(ok)
-                    filter_result.Add(mm);
+                    //tip filter
+                    if (ty != "All")
+                        if (mm.Res.Tip.Ime != ty)
+                            ok = false;
+
+                    if (ok)
+                        filter_result.Add(mm);
+                }
+            }
+            catch (Exception eee)
+            {
             }
 
             foreach (MapModel fmm in filter_result)
@@ -434,11 +453,11 @@ namespace _1_1EX
         private void loadMapContent()
         {
 
-            map_model=Serializer.LoadMapModel();
+            map_model[active_map]=Serializer.LoadMapModel();
 
-            mapa.Children.Clear();
+            c.Children.Clear();
 
-            foreach (MapModel e in map_model)
+            foreach (MapModel e in map_model[active_map])
             {
                 Image img = new Image();
                 img.Source = new BitmapImage(new Uri(e.Res.Ikonica, UriKind.RelativeOrAbsolute));
@@ -449,10 +468,11 @@ namespace _1_1EX
                 ToolTipService.SetShowDuration(img, 20000);
                 Canvas.SetLeft(img,e.Left);
                 Canvas.SetTop(img, e.Top);
-                mapa.Children.Add(img);
+                c.Children.Add(img);
             }
 
         }
+
 
         private int FindIndexResource(string id)
         {
@@ -460,6 +480,48 @@ namespace _1_1EX
                 if (resursi[i].Id == id)
                     return i;
             return -1;
+        }
+
+        private void Switch_Active(object sender,EventArgs e)
+        {
+            Reset_Map_Filter(null, null);
+            active_map = (string)((RadioButton)sender).Content;
+            loadMapContent();
+        }
+
+        private void Switch_View(object sender, EventArgs e)
+        {
+            string view_type = (string)((RadioButton)sender).Content;
+
+            if (view_type == "4View")
+            {
+                c = mapa;
+                mapgrid.Children.Clear();
+
+                ColumnDefinition col1 = new ColumnDefinition();
+                col1.Width = new GridLength(1, GridUnitType.Star);
+                ColumnDefinition col2 = new ColumnDefinition();
+                col2.Width = new GridLength(1, GridUnitType.Star);
+
+                mapgrid.ColumnDefinitions.Add(col1);
+                mapgrid.ColumnDefinitions.Add(col2);
+
+                RowDefinition rd1 = new RowDefinition();
+                rd1.Height = new GridLength(1, GridUnitType.Star);
+                RowDefinition rd = new RowDefinition();
+                rd.Height = new GridLength(1, GridUnitType.Star);
+                mapgrid.RowDefinitions.Add(rd1);
+                mapgrid.RowDefinitions.Add(rd);
+
+                
+
+            }
+            else
+            {
+                mapgrid.ColumnDefinitions.Clear();
+                mapgrid.RowDefinitions.Clear();
+                mapgrid.Children.Add(c);
+            }
         }
 
         private void modifyResourceAction(int i)

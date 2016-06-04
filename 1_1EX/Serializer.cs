@@ -17,7 +17,10 @@ namespace _1_1EX
 
         public static void SaveMapModel()
         {
-            WriteToXmlFile<List<MapModel>>(MainWindow.active_map + "_mapmodel.xml", MainWindow.map_model);
+            
+               WriteToXmlFile<List<MapModel>>(MainWindow.active_map + "_mapmodel.xml", MainWindow.map_model[MainWindow.active_map]);
+            
+           
         }
 
         public static List<MapModel> LoadMapModel()
@@ -31,16 +34,16 @@ namespace _1_1EX
 
         public static void WriteResources()
         {
-            WriteToXmlFile<List<Resurs>>(MainWindow.active_map + ".xml", MainWindow.resursi);
+            WriteToXmlFile<List<Resurs>>("resursi.xml", MainWindow.resursi);
         }
 
         public static List<Resurs> ReadResources()
         {
-            if (!File.Exists(MainWindow.active_map+".xml"))
+            if (!File.Exists("resursi.xml"))
             {
                 WriteResources();
             }
-            return ReadFromXmlFile<List<Resurs>>(MainWindow.active_map+".xml");
+            return ReadFromXmlFile<List<Resurs>>("resursi.xml");
         }
 
         public static void SaveTip()

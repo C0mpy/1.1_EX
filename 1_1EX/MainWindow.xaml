@@ -185,14 +185,24 @@
 
                 </Grid>
             </Expander>
-            
-        </StackPanel>
+                <Expander  Margin="5" Padding="1" Header="Map View">
+                    <StackPanel>
+                    <RadioButton GroupName="Os" Content="map1"  Checked="Switch_Active" />
+                        <RadioButton GroupName="Os" Content="map2"  Checked="Switch_Active" />
+                        <RadioButton GroupName="Os" Content="map3"  Checked="Switch_Active" />
+                        <RadioButton GroupName="Os" Content="map4"  Checked="Switch_Active" />
+                        <RadioButton GroupName="v" Content="singleView"  Checked="Switch_View" />
+                        <RadioButton GroupName="v" Content="4View"  Checked="Switch_View" />
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
         </ScrollViewer>
-           
-            <Canvas Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+        <Grid Name="mapgrid">
+            <Canvas  Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
                <Canvas.Background>
                     <ImageBrush ImageSource="map.jpg"  />
                </Canvas.Background>
         </Canvas>
+        </Grid>
     </DockPanel>
 </Window>
