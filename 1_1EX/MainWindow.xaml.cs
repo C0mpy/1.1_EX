@@ -134,32 +134,10 @@ namespace _1_1EX
                 carImg[i] = new Image();
                 carImg[i].Source = new BitmapImage(new Uri(resursi[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
 
-                Button b = new Button();
+                             
+                carImg[i].ToolTip = createToolTip(i);
+                ToolTipService.SetShowDuration(carImg[i], 20000);
 
-                
-
-                
-                
-                
-
-                // Set up the ToolTip text for image
-
-
-                ToolTip tooltip = new ToolTip { Content = "Id: "+resursi[i].Id+"\n"+
-                                                          "Name: "+resursi[i].Ime+"\n"+
-                                                          "Type Id: "+resursi[i].Tip.Id+"\n"+
-                                                          "Frequency: "+resursi[i].Frekvencija1+"\n"+
-                                                          "Renewable: "+resursi[i].Obnovljiv+"\n"+
-                                                          "Strategic: "+resursi[i].Vaznost+"\n"+
-                                                          "Exploitable: "+resursi[i].Eksploatacija+"\n"+
-                                                          "Measure: "+resursi[i].Mera1+"\n"+
-                                                          "Price: "+resursi[i].Cena+"$\n"+
-                                                          "Discovery Date: "+resursi[i].Datum+"\n"+
-                                                          "Tags: "+resursi[i].Etikete1[0].Id+"\n"};
-                carImg[i].ToolTip = tooltip;
-
-
-                //toolTip1.SetToolTip(carImg[i], "das");
                
                 int index = i;
                     MenuItem modMenuItem = new MenuItem();
@@ -195,6 +173,57 @@ namespace _1_1EX
 
         }
 
+        private object createToolTip(int i)
+        {
+            // Set up the ToolTip text for image
+
+                String etikete = "";
+                for (int k = 0; k < resursi[i].Etikete1.Count; k++) {
+                    etikete += "[" + resursi[i].Etikete1[k].Id + "] ";
+                }
+                if (etikete == "")
+                    etikete = "Doesn't have tags";
+
+                String tip = "";
+                if (resursi[i].Tip.Id == "")
+                    tip = "Doesn't have type";
+                else
+                    tip = "[" + resursi[i].Tip.Id + "]";
+
+                String pom = resursi[i].Opis;
+                String opis = "";
+                bool usao = false;
+
+                //Console.WriteLine(pom.Substring(24));
+                
+                while (pom.Length > 25) {
+                    String dodatak = "";
+                    if (pom[24] == ' ' || (pom[23] == ' ' && pom[25] == ' '))
+                        dodatak = "\n\t      ";
+                    else
+                        dodatak = "-\n\t      ";
+                    opis += pom.Substring(0, 25)+dodatak;
+                    pom = pom.Substring(25);
+                    usao = true;
+                }
+                if (usao)
+                    opis += pom;
+
+            ToolTip tooltip = new ToolTip { Content = "Id: "+resursi[i].Id+"\n"+
+                                                          "Name: "+resursi[i].Ime+"\n"+
+                                                          "Type Id: "+tip+"\n"+
+                                                          "Frequency: "+resursi[i].Frekvencija1+"\n"+
+                                                          "Renewable: "+resursi[i].Obnovljiv+"\n"+
+                                                          "Strategic: "+resursi[i].Vaznost+"\n"+
+                                                          "Exploitable: "+resursi[i].Eksploatacija+"\n"+
+                                                          "Measure: "+resursi[i].Mera1+"\n"+
+                                                          "Price: "+resursi[i].Cena+"$\n"+
+                                                          "Discovery Date: "+resursi[i].Datum+"\n"+
+                                                          "Tags: "+etikete+"\n"+
+                                                          "Description: "+opis};
+            return tooltip;
+        }
+
         //pocni drag sa liste resursa
         private void startDrag(Image img,Resurs res)
         {
@@ -214,6 +243,10 @@ namespace _1_1EX
                 drag_image.Source = img.Source;
                 drag_image.Height = 30;
                 drag_image.Width = 30;
+
+                drag_image.ToolTip = img.ToolTip;
+                ToolTipService.SetShowDuration(drag_image, 10000);
+
                 // Initialize the drag & drop operation
                 mapa.Children.Add(drag_image);
 
@@ -411,11 +444,22 @@ namespace _1_1EX
                 img.Source = new BitmapImage(new Uri(e.Res.Ikonica, UriKind.RelativeOrAbsolute));
                 img.Height = 30;
                 img.Width = 30;
+                int index = FindIndexResource(e.Res.Id);
+                img.ToolTip = createToolTip(index);
+                ToolTipService.SetShowDuration(img, 20000);
                 Canvas.SetLeft(img,e.Left);
                 Canvas.SetTop(img, e.Top);
                 mapa.Children.Add(img);
             }
 
+        }
+
+        private int FindIndexResource(string id)
+        {
+            for (int i = 0; i < resursi.Count; i++)
+                if (resursi[i].Id == id)
+                    return i;
+            return -1;
         }
 
         private void modifyResourceAction(int i)
