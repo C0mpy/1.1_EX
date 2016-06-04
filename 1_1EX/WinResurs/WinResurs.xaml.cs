@@ -202,8 +202,8 @@ namespace _1_1EX
             {
                 // Open document 
                 string filename = openFileDialog.FileName;
-                //string startupPath = Environment.CurrentDirectory;
-                //System.IO.File.Copy(filename, startupPath.Substring(0, startupPath.Length - 9) + "SlikeResursi\\" + System.IO.Path.GetFileName(filename));
+                string startupPath = Environment.CurrentDirectory;
+                System.IO.File.Copy(filename, startupPath.Substring(0, startupPath.Length - 9) + "SlikeResursi\\" + System.IO.Path.GetFileName(filename));
                 resurs.Ikonica = filename;
             }
         }

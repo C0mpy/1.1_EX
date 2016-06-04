@@ -84,20 +84,22 @@ namespace _1_1EX
 
         public void ucitajResurse()
         {
+            
 
+            int num_col = 6;
             gr1.Children.Clear();
             gr1.Height = 136;
-            int br = resursi.Count + 1;
+            int br = resursi.Count;
             Image[] carImg = new Image[br];
 
             MenuItem[] mi = new MenuItem[br];
             Border[] bor = new Border[br];
 
 
-            ColumnDefinition[] gridCol1 = new ColumnDefinition[br / 5 + 5];
+            ColumnDefinition[] gridCol1 = new ColumnDefinition[br / num_col + num_col];
             RowDefinition[] gridRow1 = new RowDefinition[br];
 
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < num_col; j++)
             {
                 gridCol1[j] = new ColumnDefinition();
                 gridCol1[j].Width = new GridLength(40);
@@ -110,36 +112,56 @@ namespace _1_1EX
             for (int i = 0; i < br; i++)
             {
 
-                if ((i % 5) == 0)
+                if ((i % num_col) == 0)
                 {
                     col++;
-                    gridRow1[i / 5] = new RowDefinition();
+                    gridRow1[i / num_col] = new RowDefinition();
                     //gridRow1[i].Height = new GridLength(40);
 
-                    gridRow1[i / 5].Height = new GridLength(0.5, GridUnitType.Star);
-                    gridRow1[i / 5].Height = GridLength.Auto;
-                    gr1.RowDefinitions.Add(gridRow1[i / 5]);
+                    gridRow1[i / num_col].Height = new GridLength(0.5, GridUnitType.Star);
+                    gridRow1[i / num_col].Height = GridLength.Auto;
+                    gr1.RowDefinitions.Add(gridRow1[i / num_col]);
 
 
                 }
 
-                Console.WriteLine(i % 5);
-                if (col > 2 & ((i % 5) == 0))
+                
+                if (col > 2 & ((i % num_col) == 0))
                 {
                     gr1.Height += 40;
                 }
 
                 carImg[i] = new Image();
-                if (i == br - 1)
-                {
-                    carImg[i].Source = new BitmapImage(new Uri("add2.png", UriKind.RelativeOrAbsolute));
-                }
-                else
-                {
-                    
-                    carImg[i].Source = new BitmapImage(new Uri(resursi[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
+                carImg[i].Source = new BitmapImage(new Uri(resursi[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
 
-                    int index = i;
+                Button b = new Button();
+
+                
+
+                
+                
+                
+
+                // Set up the ToolTip text for image
+
+
+                ToolTip tooltip = new ToolTip { Content = "Id: "+resursi[i].Id+"\n"+
+                                                          "Name: "+resursi[i].Ime+"\n"+
+                                                          "Type Id: "+resursi[i].Tip.Id+"\n"+
+                                                          "Frequency: "+resursi[i].Frekvencija1+"\n"+
+                                                          "Renewable: "+resursi[i].Obnovljiv+"\n"+
+                                                          "Strategic: "+resursi[i].Vaznost+"\n"+
+                                                          "Exploitable: "+resursi[i].Eksploatacija+"\n"+
+                                                          "Measure: "+resursi[i].Mera1+"\n"+
+                                                          "Price: "+resursi[i].Cena+"$\n"+
+                                                          "Discovery Date: "+resursi[i].Datum+"\n"+
+                                                          "Tags: "+resursi[i].Etikete1[0].Id+"\n"};
+                carImg[i].ToolTip = tooltip;
+
+
+                //toolTip1.SetToolTip(carImg[i], "das");
+               
+                int index = i;
                     MenuItem modMenuItem = new MenuItem();
                     modMenuItem.Header = "Modify";
                     modMenuItem.Click += (sender, e) => modifyResourceAction(index);
@@ -151,7 +173,7 @@ namespace _1_1EX
                     cm.Items.Add(delMenuItem);
                     carImg[i].ContextMenu = cm;
                     carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],resursi[index]);
-                }
+                
 
                 carImg[i].Width = 40;
                 carImg[i].Height = 40;
@@ -162,7 +184,7 @@ namespace _1_1EX
                 bor[i].Visibility = System.Windows.Visibility.Visible;
                 bor[i].BorderBrush = Brushes.Silver;
                 bor[i].BorderThickness = new Thickness(1);
-                bor[i].SetValue(Grid.ColumnProperty, i % 5);
+                bor[i].SetValue(Grid.ColumnProperty, i % num_col);
                 bor[i].SetValue(Grid.RowProperty, col);
 
                 gr1.Children.Add(bor[i]);
