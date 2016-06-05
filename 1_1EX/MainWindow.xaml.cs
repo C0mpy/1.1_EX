@@ -207,7 +207,8 @@ namespace _1_1EX
                 String opis = "";
                 bool usao = false;
 
-                //Console.WriteLine(pom.Substring(24));
+                if (pom.Length <= 25)
+                    opis = pom;
                 
                 while (pom.Length > 25) {
                     String dodatak = "";
@@ -221,6 +222,9 @@ namespace _1_1EX
                 }
                 if (usao)
                     opis += pom;
+
+                if (opis == "")
+                    opis = "Doesn't have description";
 
             ToolTip tooltip = new ToolTip { Content = "Id: "+resursi[i].Id+"\n"+
                                                           "Name: "+resursi[i].Ime+"\n"+
