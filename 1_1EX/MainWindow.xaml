@@ -212,11 +212,17 @@
            
         </ScrollViewer>
         <Grid Name="mapgrid">
-            <Canvas  Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Canvas Width="{Binding ActualWidth, ElementName=image}" Height="{Binding ActualHeight, ElementName=image}" Name="mapa" AllowDrop="True" DragOver="Canvas_DragOver" MouseLeftButtonDown="Canvas_StartDrag" Drop="Canvas_Drop" >
                <Canvas.Background>
-                    <ImageBrush ImageSource="map.jpg"  />
-               </Canvas.Background>
+                        <VisualBrush  >
+                            <VisualBrush.Visual>
+                                <Image x:Name="image" Source="/1_1EX;component/map.jpg"  />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Canvas.Background>
         </Canvas>
+            </ScrollViewer>
         </Grid>
     </DockPanel>
 </Window>
