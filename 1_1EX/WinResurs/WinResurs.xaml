@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:_1_1EX"
         Title="Modify Resource"  mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="514" Width="300"
-        ResizeMode="NoResize">
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="530" Width="300"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
     <StackPanel Orientation="Vertical">
 
         <Grid Margin="0,0,5,0">
@@ -34,7 +35,13 @@
 
             <Label Grid.Row="0" Grid.Column="0" Content="Id:"/>
             <TextBox x:Name="id" Grid.Column="1" Margin="0,3,0,3" Grid.ColumnSpan="2">
-                
+                <TextBox.Text>
+                    <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <src:idExistsValidationRule ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
             </TextBox>
             <!--Labela u kojoj se prikazuje greska-->
             <Label Grid.Row="1" Grid.Column="1" Foreground="Red" Content="{Binding ElementName=id, Path=(Validation.Errors)[0].ErrorContent}" Grid.ColumnSpan="2"></Label>
@@ -57,8 +64,11 @@
 
             <Label Grid.Row="5" Grid.Column="0" Margin="0,5,0,5" Content="Type:"/>
             <!--TODO Event na klik dugmeta za odabir/pravljenje tipa resursa-->
-            <Button Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" 
-                         MinWidth="80" Margin="0,5,0,5" Content="   Select/Create...   " Click="TypeClick" Width="100" Grid.ColumnSpan="2" />
+            <StackPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Image Width="25" Height="25" Margin="0,0,5,0"  x:Name="typeIcon"/>
+                <Button HorizontalAlignment="Right" 
+                         MinWidth="80" Content="   Select Resource Type...   " Click="TypeSelect" Height="25" />
+            </StackPanel>
 
             <Label Grid.Row="6" Grid.Column="0" Content="Frequency:"/>
             <ComboBox x:Name="frekvencija" Grid.Row="6" Grid.Column="1" Margin="0,0,0,0" Grid.ColumnSpan="2">
@@ -69,8 +79,13 @@
 
             <Label Grid.Row="7" Grid.Column="0" Margin="0,5,0,5" Content="Icon:"/>
             <!--TODO Event za odabir ikonice-->
-            <Button x:Name="ikonica" Grid.Row="7" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" 
-                         MinWidth="80" Content="   Browse...   " Width="80" Grid.ColumnSpan="2"  Click="odaberiIkonicu" />
+            <StackPanel x:Name="iconPanel" Grid.Row="7" Grid.Column="1"  Margin="0, 5, 0 , 5" HorizontalAlignment="Right" Orientation="Horizontal" >
+                <Image x:Name="iconDisplay" Width="50" Height="50" HorizontalAlignment="Left"/>
+                <Button Visibility="Collapsed"  Margin="0,0,5,0" x:Name="removeButton" Click="removePath" ToolTip="Deselect an icon." Width="26" Height="26">
+                    <Image Source="../delete-small.png" Width="22" Height="22"/>
+                </Button>
+                <Button x:Name="ikonica"  MinWidth="80" Height="25" Content="   Browse...   "  Click="odaberiIkonicu" ToolTip="Select an icon for the resource." />
+            </StackPanel>
 
             <CheckBox x:Name="obnovljiv" Grid.Row="8" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" Width="127" Grid.ColumnSpan="2">Renewable Resource</CheckBox>
             <CheckBox x:Name="vaznost" Grid.Row="9" Grid.Column="1" Margin="0,5,0,5" HorizontalAlignment="Right" Width="130" Grid.ColumnSpan="2">Strategic Importance</CheckBox>
@@ -104,8 +119,14 @@
 
             <Label Grid.Row="15" Grid.Column="0" Margin="0,0,0,5" Content="Tags:"/>
             <!--Event za odabir/izradu etikete-->
-            <Button x:Name="etiketeButton" Grid.Row="15" Grid.Column="1" Margin="0,2,0,3" HorizontalAlignment="Right" 
-                         MinWidth="80" Content="   Select/Create...   " Click="EtiketaClick" Grid.ColumnSpan="2" />
+            <StackPanel Grid.Row="15" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Border x:Name="border2" Margin="0,2,3,0" BorderBrush="SkyBlue" BorderThickness="1" Height="25">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                        <Grid Name="gr3" Height="Auto" Width="75"></Grid>
+                    </ScrollViewer>
+                </Border>
+                <Button x:Name="etiketeButton" HorizontalAlignment="Right" Width="85" Height="25" Content="   Select Tags...   " Click="TagSelect" />
+            </StackPanel>
         </Grid>
         <Grid Margin="5,0,5,0">
             <Grid.RowDefinitions>
@@ -131,8 +152,8 @@
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
                                     <Condition Binding="{Binding ElementName=cena, Path=(Validation.HasError)}" Value="false" />
-
                                     <Condition Binding="{Binding ElementName=ime, Path=(Validation.HasError)}" Value="false" />
+                                    <Condition Binding="{Binding ElementName=id, Path=(Validation.HasError)}" Value="false" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="true" />
                             </MultiDataTrigger>

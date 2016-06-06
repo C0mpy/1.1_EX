@@ -25,10 +25,11 @@ namespace _1_1EX.WinEtiketa
             InitializeComponent();
             tag = new Etiketa();
             this.DataContext = this;
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
         }
 
         #region NotifyProperties
-        private Etiketa tag;
+        public static Etiketa tag;
         public string tagId
         {
             get
@@ -57,22 +58,13 @@ namespace _1_1EX.WinEtiketa
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
-        private void create_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            if (tag.Id == "")
-            {
-                idtag.Text = "1";
-                idtag.Text = "";
-                return;
-            }
-
-            tag.Id = idtag.Text;
+            tag.Id = tagid.Text;
             tag.Boja = (Color)colorPicker.SelectedColor;
-            tag.Opis = desctag.Text;
-            MainWindow.resurs.Etikete1.Add(tag);
-            MainWindow.tags.Add(tag);
-            Serializer.SaveEtiketa(); //sacuvaj promene u fajl
-            tag = new Etiketa();
+            tag.Opis = tagopis.Text;
+            TagManagement.tags.Add(tag);
+            TagManagement.displayTable.Add(tag);
             this.Close();
         }
 

@@ -73,14 +73,26 @@
       <DependentUpon>EtiketaWin.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validator.cs" />
+    <Compile Include="WinEtiketa\TagEdit.xaml.cs">
+      <DependentUpon>TagEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinEtiketa\TagManagement.xaml.cs">
       <DependentUpon>TagManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinEtiketa\TagSelect.xaml.cs">
+      <DependentUpon>TagSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinResurs\WinResurs.xaml.cs">
       <DependentUpon>WinResurs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinTip\TypeEdit.xaml.cs">
+      <DependentUpon>TypeEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinTip\TypeManagement.xaml.cs">
       <DependentUpon>TypeManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinTip\TypeSelect.xaml.cs">
+      <DependentUpon>TypeSelect.xaml</DependentUpon>
     </Compile>
     <Compile Include="WinTip\WinTip.xaml.cs">
       <DependentUpon>WinTip.xaml</DependentUpon>
@@ -109,7 +121,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WinEtiketa\TagEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinEtiketa\TagManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinEtiketa\TagSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,7 +137,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="WinTip\TypeEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinTip\TypeManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinTip\TypeSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,6 +197,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="delete-small.png" />
     <Content Include="Libs\Xceed.Wpf.Toolkit.dll" />
     <Resource Include="vortex.png" />
   </ItemGroup>

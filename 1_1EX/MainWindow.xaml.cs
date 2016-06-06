@@ -240,6 +240,57 @@ namespace _1_1EX
             return tooltip;
         }
 
+        public void ucitajEtikete()
+        {
+
+            gr2.Children.Clear();
+            int br = resurs.Etikete1.Count;
+            Rectangle[] carImg = new Rectangle[br];
+            MenuItem[] mi = new MenuItem[br];
+            Border[] bor = new Border[br];
+            ColumnDefinition[] gridCol1 = new ColumnDefinition[3];
+            RowDefinition[] gridRow1 = new RowDefinition[br / 3 + 1];
+
+            for (int j = 0; j < 3; j++)
+            {
+                gridCol1[j] = new ColumnDefinition();
+                gridCol1[j].Width = new GridLength(31);
+                gr2.ColumnDefinitions.Add(gridCol1[j]);
+            }
+
+            int row = -1;
+            for (int i = 0; i < br; i++)
+            {
+                if ((i % 3) == 0)
+                {
+                    row++;
+                    gridRow1[row] = new RowDefinition();
+                    gridRow1[row].Height = new GridLength(0.5, GridUnitType.Star);
+                    gridRow1[row].Height = GridLength.Auto;
+                    gr2.RowDefinitions.Add(gridRow1[row]);
+
+                }
+
+                carImg[i] = new Rectangle();
+                carImg[i].Height = 25;
+                carImg[i].Width = 31;
+                carImg[i].Fill = new SolidColorBrush(resurs.Etikete1[i].Boja);
+
+                RenderOptions.SetBitmapScalingMode(carImg[i], BitmapScalingMode.Fant);
+                bor[i] = new Border();
+                bor[i].Child = carImg[i];
+                bor[i].Visibility = System.Windows.Visibility.Visible;
+                bor[i].BorderBrush = Brushes.Silver;
+                bor[i].BorderThickness = new Thickness(1);
+                bor[i].SetValue(Grid.ColumnProperty, i % 3);
+                bor[i].SetValue(Grid.RowProperty, row);
+
+                gr2.Children.Add(bor[i]);
+                
+            }
+        }
+
+
         //pocni drag sa liste resursa
         private void startDrag(Image img,Resurs res)
         {
@@ -334,7 +385,6 @@ namespace _1_1EX
                     //save map content
                     map_model[active_map].Add(new MapModel( point.Y, point.X, drag_res));
                     Serializer.SaveMapModel();
-                
 
                 //reset
                 drag_image = null;
@@ -342,8 +392,7 @@ namespace _1_1EX
                 drag_res= null;
                 drag_from.X = -1;
                 drag_from.Y = -1;
-            
-              
+      
         }
 
         private void Canvas_DragOver(object sender, DragEventArgs e)
@@ -354,9 +403,8 @@ namespace _1_1EX
             Canvas.SetLeft(drag_image, point.X);
             Canvas.SetTop(drag_image, point.Y);
 
-           
-
         }
+
 
         private void Map_Filter(object sender, EventArgs e)
         {
@@ -365,10 +413,10 @@ namespace _1_1EX
 
 
             //pokupi sve uslove/////////////////////////
-            string name_query = textBox1.Text;
+            string name_query = map_filter_text.Text;
 
-            
-            bool obnovljivv = (bool) obnovljiv_q.IsChecked;
+
+            bool obnovljivv = (bool)obnovljiv_q.IsChecked;
             bool vazno = (bool)vaznost_q.IsChecked;
             bool eksploat = (bool)eksploatacija_q.IsChecked;
            
@@ -442,8 +490,6 @@ namespace _1_1EX
 
         private void Reset_Map_Filter(object sender, EventArgs e)
         {
-
-
             textBox1.Text = "";
             obnovljiv_q.IsChecked = false;
             vaznost_q.IsChecked = false;
@@ -530,7 +576,7 @@ namespace _1_1EX
         private void modifyResourceAction(int i)
         {
             WinResurs wr = new WinResurs(this, resursi[i]);
-            wr.Show();
+            wr.ShowDialog();
         }
 
         private void deleteResourceAction(int i)
@@ -543,10 +589,20 @@ namespace _1_1EX
 
         private void odaberiIkonicu(object sender, RoutedEventArgs e)
         {
+            
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpeg|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
 
             // Display OpenFileDialog by calling ShowDialog method 
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
             Nullable<bool> result = openFileDialog.ShowDialog();
 
 
@@ -558,7 +614,11 @@ namespace _1_1EX
                 //string startupPath = Environment.CurrentDirectory;
                 //System.IO.File.Copy(filename, startupPath.Substring(0, startupPath.Length - 9) + "SlikeResursi\\" + System.IO.Path.GetFileName(filename));
                 resurs.Ikonica = filename;
+
+                iconDisplay.Source = new BitmapImage(new Uri(filename));
+                removeButton.Visibility = Visibility.Visible;
             }
+            darkwindow.Close();
         }
 
         private void DatePicker_SelectedDateChanged(object sender,
@@ -572,10 +632,24 @@ namespace _1_1EX
             
         }
 
-        
-
         #region NotifyProperties
         public static Resurs resurs;
+        public TipResursa Type
+        {
+            get
+            {
+                return resurs.Tip;
+            }
+            set
+            {
+                if (value != resurs.Tip)
+                {
+                    resurs.Tip = value;
+                    OnPropertyChanged("Type");
+                }
+            }
+        }
+
         public string Id
         {
             get
@@ -623,7 +697,6 @@ namespace _1_1EX
                 }
             }
         }
-
         #endregion
 
         #region PropertyChangedNotifier
@@ -649,7 +722,11 @@ namespace _1_1EX
             mera.SelectedIndex = 0;
             cena.Text = "0";
             picker.SelectedDate = DateTime.Today;
-
+            gr2.Children.Clear();
+            removeButton.Visibility = Visibility.Collapsed;
+            resurs.Ikonica = "";
+            iconDisplay.Source = null;
+            typeIcon.Source = null;
 
         }
 
@@ -680,7 +757,6 @@ namespace _1_1EX
             dodajResursFormReset();
 
         }
-
         private void skiniSifru(object sender, RoutedEventArgs e)
         {
             string path = Environment.CurrentDirectory + "\\pass.txt";
@@ -694,16 +770,83 @@ namespace _1_1EX
             sp.Show();
         }
 
-        private void EtiketaClick(object sender, RoutedEventArgs e)
+        private void TypeSelect(object sender, RoutedEventArgs e)
         {
-            var ew = new _1_1EX.WinTag.TagManagement(tags, resurs);
-            ew.Show();
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
+            var ew = new _1_1EX.WinTip.TypeSelect(types, resurs);
+            ew.ShowDialog();
+            darkwindow.Close();
+            MessageBox.Show(resurs.ToString());
+            if (resurs.Tip.Ikonica != "")
+            {
+                typeIcon.Source = new BitmapImage(new Uri(resurs.Tip.Ikonica));
+            }
         }
 
-        private void TypeClick(object sender, RoutedEventArgs e)
+        private void TypeManager(object sender, RoutedEventArgs e)
         {
-            var ew = new _1_1EX.WinTip.TypeManagement(types, resurs);
-            ew.Show();
+            var ew = new _1_1EX.WinTip.TypeManagement(types);
+
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
+            ew.ShowDialog();
+            darkwindow.Close();
+        }
+
+        private void TagManager(object sender, RoutedEventArgs e)
+        {
+            var ew = new _1_1EX.WinEtiketa.TagManagement(tags);
+
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
+            ew.ShowDialog();
+            darkwindow.Close();
+        }
+
+        private void TagSelect(object sender, RoutedEventArgs e)
+        {
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
+            var ew = new _1_1EX.WinEtiketa.TagSelect(tags, resurs);
+            ew.ShowDialog();
+            darkwindow.Close();
+            ucitajEtikete();
+        }
+
+        private void removePath(object sender, RoutedEventArgs e)
+        {
+            resurs.Ikonica = "";
+            iconDisplay.Source = null;
+            removeButton.Visibility = Visibility.Collapsed;
         }
 
     }

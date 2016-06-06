@@ -1,15 +1,15 @@
-﻿<Window x:Class="_1_1EX.WinTip.WinTip"
+﻿<Window x:Class="_1_1EX.WinTip.TypeEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        Title="Create Type" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:src="clr-namespace:_1_1EX"
+        Title="Edit Type" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:src="clr-namespace:_1_1EX"
         ResizeMode="NoResize" Height="425" Width="400">
     <Grid Margin="0">
         <Grid Height="325" Width="380" Margin="10,10,10,10" VerticalAlignment="Top">
             <Label Content="Id:" Height="25" HorizontalAlignment="Left" Margin="5,0,0,0" Name="label4" VerticalAlignment="Top" Width="100" />
-            <TextBox Height="25" HorizontalAlignment="Left" Margin="5,30,0,0" x:Name="tipid" VerticalAlignment="Top" Width="200">
+            <TextBox x:Name="tipid" Height="25" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top" Width="200">
                 <TextBox.Text>
-                    <Binding Path="tipId" UpdateSourceTrigger="PropertyChanged">
+                    <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <src:idTypeExistsManager ValidationStep="RawProposedValue"/>
                         </Binding.ValidationRules>
@@ -17,15 +17,15 @@
                 </TextBox.Text>
             </TextBox>
             <Label Foreground="Red" Content="{Binding ElementName=tipid, Path=(Validation.Errors)[0].ErrorContent}" Height="27" HorizontalAlignment="Left" Margin="205,30,0,0" Name="label5" VerticalAlignment="Top" Width="185"/>
-
+            
             <Label Content="Name:" Height="25" HorizontalAlignment="Left" Margin="5,55,0,0" Name="label1" VerticalAlignment="Top" Width="100"/>
             <TextBox Height="25" HorizontalAlignment="Left" Margin="5,80,5,0" x:Name="tipime" VerticalAlignment="Top" Width="365"/>
             <Label Content="Description:" Height="25" HorizontalAlignment="Left" Margin="5,105,0,0" Name="label2" VerticalAlignment="Top" Width="100" />
             <TextBox Height="100" HorizontalAlignment="Left" Margin="5,130,0,0" x:Name="tipopis" TextWrapping="Wrap" VerticalAlignment="Top" Width="365"/>
             <Label Content="Icon:" Height="25" HorizontalAlignment="Left" Margin="5,230,0,0" Name="label3" VerticalAlignment="Top" Width="40"/>
             <Image Width="40" Height="40" x:Name="iconDisplay" Margin="5,255,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Content="Choose..." Height="25"  Width="77"  Margin="5,300,0,0" Name="button3" Click="button3_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Visibility="Collapsed"  Margin="82,300,0,0"  Click="removePath" x:Name="removeButton" ToolTip="Deselect an icon." Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button Content="Choose..." Click="iconSelect" Height="25"  Width="77"  Margin="5,300,0,0" Name="button3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button Visibility="Visible" Click="removePath"  Margin="82,300,0,0"  x:Name="removeButton" ToolTip="Deselect an icon." Width="25" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Image Source="../delete-small.png" Width="22" Height="22"/>
             </Button>
         </Grid>
@@ -34,7 +34,7 @@
                 <ContextMenu />
             </Rectangle.ContextMenu>
         </Rectangle>
-        <Button Content="Create" Height="25" Width="180" Margin="15,355,0,0" Name="button2" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button2_Click" />
-        <Button Content="Cancel" Height="25" Width="180" Margin="200,355,0,0" Name="button1" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button1_Click" />
+        <Button Content="Save" Click="saveType" Height="25" Width="180" Margin="15,355,0,0" Name="button2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Cancel" Click="cancelEdit" Height="25" Width="180" Margin="200,355,0,0" Name="button1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </Grid>
 </Window>

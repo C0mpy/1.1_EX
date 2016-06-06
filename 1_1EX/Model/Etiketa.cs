@@ -4,12 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows;
+using System.ComponentModel;
 
 namespace _1_1EX.Model
 {
-    
-    public class Etiketa
+
+    public class Etiketa : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         string id;
         Color boja;
@@ -28,22 +37,50 @@ namespace _1_1EX.Model
             Opis = "";
         }
 
-        public Color Boja
-        {
-            get { return boja; }
-            set { boja = value; }
-        }
-
-        public string Opis
-        {
-            get { return opis; }
-            set { opis = value; }
-        }
-
         public string Id
         {
-            get { return id; }
-            set { id = value; }
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+        public Color Boja
+        {
+            get
+            {
+                return boja;
+            }
+            set
+            {
+                if (value != boja)
+                {
+                    boja = value;
+                    OnPropertyChanged("Boja");
+                }
+            }
+        }
+        public string Opis
+        {
+            get
+            {
+                return opis;
+            }
+            set
+            {
+                if (value != opis)
+                {
+                    opis = value;
+                    OnPropertyChanged("Opis");
+                }
+            }
         }
 
         public override string ToString()

@@ -28,10 +28,10 @@ namespace _1_1EX.Model
         public Resurs()
         {
             id = "";
-            tip = new TipResursa();
             ikonica = "";
             cena = "0";
             etikete = new ObservableCollection<Etiketa>();
+            tip = new TipResursa();
         }
 
         public Resurs(string Id, string Ime, string Opis, TipResursa Tip, Frekvencija Frek, string Ikonica, bool Obnovljiv,

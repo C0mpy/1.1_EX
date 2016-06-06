@@ -16,93 +16,126 @@ using _1_1EX.Model;
 
 namespace _1_1EX.WinTip
 {
-    /// <summary>
-    /// Interaction logic for TypeManagement.xaml
-    /// </summary>
-    /// 
 
-    //ODRADITI PRIKAZ IKONICE U TABELI
     public partial class TypeManagement : Window
     {
-        public ObservableCollection<TipResursa> types
+        public static ObservableCollection<TipResursa> types
         {
             get;
             set;
         }
-        public Resurs resource;
-        public TypeManagement(ObservableCollection<TipResursa> t, Resurs r)
+        public static ObservableCollection<TipResursa> displayTable
+        {
+            get;
+            set;
+        }
+        public List<TipResursa> backup = new List<TipResursa>();
+        public bool closeFlag = false;
+
+        public TypeManagement(ObservableCollection<TipResursa> t)
         {
             InitializeComponent();
             this.DataContext = this;
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            types = t;
-            resource = r;
-            dgTypes.ItemsSource = types;
-            this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-        }
-
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            if (resource.Tip != null)
+            types = new ObservableCollection<TipResursa>();
+            displayTable = new ObservableCollection<TipResursa>();
+            foreach (TipResursa tr in t)
             {
-                for (int i = 0; i < dgTypes.Items.Count; i++)
-                {
-                    if (resource.Tip.Id == types[i].Id)
-                    {
-                        RadioButton rb = FindVisualChildren<RadioButton>(dgTypes).ElementAt(i);
-                        rb.IsChecked = true;
-                        break;
-                    }
-                }
+                types.Add(new TipResursa(tr.Id, tr.Ime, tr.Ikonica, tr.Opis));
+                backup.Add(new TipResursa(tr.Id, tr.Ime, tr.Ikonica, tr.Opis));
+                displayTable.Add(new TipResursa(tr.Id, tr.Ime, tr.Ikonica, tr.Opis));
             }
+
+            if (t.Count != 0)
+            {
+                dgTypes.SelectedIndex = 0;
+            }
+
         }
 
         private void TypeCreateClick(object sender, RoutedEventArgs e)
         {
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
             var ew = new _1_1EX.WinTip.WinTip();
-            ew.Show();
+            ew.ShowDialog();
+            darkwindow.Close();
         }
 
         private void TypeDeleteClick(object sender, RoutedEventArgs e)
         {
-            types.Remove((TipResursa)dgTypes.SelectedItem);
-        }
-
-        private void SaveClick(object sender, RoutedEventArgs e)
-        {
-
-
-            for (int j = 0; j < dgTypes.Items.Count; j++)
+            for (int i = 0; i < types.Count; i++)
             {
-                RadioButton rb = FindVisualChildren<RadioButton>(dgTypes).ElementAt(j);
-                if (rb.IsChecked == true)
+                if (types[i].Id == ((TipResursa)dgTypes.SelectedItem).Id)
                 {
-                    resource.Tip = types.ElementAt(j);
+                    types.RemoveAt(i);
                     break;
                 }
             }
+            displayTable.Remove((TipResursa)dgTypes.SelectedItem);
+        }
 
+        private void save_Click(object sender, RoutedEventArgs e)
+        {
+            closeFlag = true;
+            MainWindow.types = types;
+            Serializer.SaveTip();
             this.Close();
         }
 
-        //pa zar mora ovo da se koristi da bih dobio element iz DataGridTemplateColumn u WPF?!
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        private void filterTable(object sender, RoutedEventArgs e)
         {
-            if (depObj != null)
+            displayTable.Clear();
+            foreach (TipResursa tr in types)
             {
-                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                if (tr.Id.ToLower().Contains(searchTextBox.Text.ToLower()))
                 {
-                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                    if (child != null && child is T)
-                    {
-                        yield return (T)child;
-                    }
+                    displayTable.Add(tr);
+                }
+            }
+        }
 
-                    foreach (T childOfChild in FindVisualChildren<T>(child))
-                    {
-                        yield return childOfChild;
-                    }
+        private void typeEdit_Click(object sender, RoutedEventArgs e)
+        {
+            TipResursa tr = dgTypes.SelectedItem as TipResursa;
+            var darkwindow = new Window()
+            {
+                Background = Brushes.Black,
+                Opacity = 0.4,
+                AllowsTransparency = true,
+                WindowStyle = WindowStyle.None,
+                WindowState = WindowState.Maximized,
+            };
+            darkwindow.Show();
+            var ew = new _1_1EX.WinTip.TypeEdit(tr);
+            ew.ShowDialog();
+            darkwindow.Close();
+            if (types.Count == 1)
+            {
+                dgTypes.SelectedIndex = 0;
+            }
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (!closeFlag)
+            {
+                MainWindow.types.Clear();
+                foreach (TipResursa tr in backup)
+                {
+                    MainWindow.types.Add(tr);
                 }
             }
         }

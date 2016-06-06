@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using _1_1EX.Model;
+using _1_1EX.WinTip;
+using _1_1EX.WinEtiketa;
 
 namespace _1_1EX
 {
@@ -117,6 +119,56 @@ namespace _1_1EX
 
             return new ValidationResult(true, null);
         }
+    }
+
+    public class idTypeExistsManager : ValidationRule
+    {
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            string s = value as string;
+            if (s == "")
+            {
+                return new ValidationResult(false, "Please input an ID.");
+            }
+            for (int i = 0; i < TypeManagement.types.Count; i++)
+            {
+                if (TypeManagement.types.ElementAt(i).Id == s)
+                {
+                    return new ValidationResult(false, "Type with inputted ID exists.");
+                }
+
+            }
+
+            return new ValidationResult(true, null);
+        }
+    }
+
+    public class idTagExistsManager : ValidationRule
+    {
+
+        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (TagManagement.tags.Count != 0)
+            {
+                string s = value as string;
+                if (s == "")
+                {
+                    return new ValidationResult(false, "Please input an ID.");
+                }
+
+                for (int i = 0; i < TagManagement.tags.Count; i++)
+                {
+                    if (TagManagement.tags.ElementAt(i).Id == s)
+                    {
+                        return new ValidationResult(false, "Tag with inputted ID exists.");
+                    }
+                }
+
+            }
+            return new ValidationResult(true, null);
+        }
+            
     }
 
 }

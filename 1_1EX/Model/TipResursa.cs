@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
 namespace _1_1EX.Model
 {
-    public class TipResursa
+    public class TipResursa : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
+        }
 
         string id;
         string ime;
@@ -30,26 +39,63 @@ namespace _1_1EX.Model
 
         public string Id
         {
-            get { return id; }
-            set { id = value; }
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
         }
-
         public string Ime
         {
-            get { return ime; }
-            set { ime = value; }
+            get
+            {
+                return ime;
+            }
+            set
+            {
+                if (value != ime)
+                {
+                    ime = value;
+                    OnPropertyChanged("Ime");
+                }
+            }
         }
-
         public string Ikonica
         {
-            get { return ikonica; }
-            set { ikonica = value; }
+            get
+            {
+                return ikonica;
+            }
+            set
+            {
+                if (value != ikonica)
+                {
+                    ikonica = value;
+                    OnPropertyChanged("Ikonica");
+                }
+            }
         }
-
         public string Opis
         {
-            get { return opis; }
-            set { opis = value; }
+            get
+            {
+                return opis;
+            }
+            set
+            {
+                if (value != opis)
+                {
+                    opis = value;
+                    OnPropertyChanged("Opis");
+                }
+            }
         }
 
         public override string ToString()
