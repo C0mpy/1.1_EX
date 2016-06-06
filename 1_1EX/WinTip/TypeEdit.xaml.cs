@@ -85,6 +85,12 @@ namespace _1_1EX.WinTip
 
         private void saveType(object sender, RoutedEventArgs e)
         {
+            if (this.icon == "") {
+                string startupPath = Environment.CurrentDirectory;
+                this.icon = startupPath.Substring(0, startupPath.Length - 9) + "/type.png";
+            }
+            
+
             TypeManagement.types.Add(new TipResursa(Id, tipime.Text, this.icon, tipopis.Text));
             TypeManagement.displayTable.Add(new TipResursa(Id, tipime.Text, this.icon, tipopis.Text));
             this.closeFlag = true;

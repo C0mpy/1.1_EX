@@ -749,6 +749,11 @@ namespace _1_1EX
             resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
+            if (resurs.Ikonica == "") {
+                string startupPath = Environment.CurrentDirectory;
+                resurs.Ikonica = startupPath.Substring(0, startupPath.Length - 9) + "/resources.png";
+            }
+                
             resursi.Add(resurs);
 
             ucitajResurse();

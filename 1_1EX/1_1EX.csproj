@@ -197,6 +197,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="type.png" />
+    <Resource Include="resources.png" />
     <Resource Include="delete-small.png" />
     <Content Include="Libs\Xceed.Wpf.Toolkit.dll" />
     <Resource Include="vortex.png" />

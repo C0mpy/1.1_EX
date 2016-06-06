@@ -96,12 +96,16 @@ namespace _1_1EX
                 {
                     typeIcon.Source = new BitmapImage(new Uri(resurs.Tip.Ikonica));
                 }
+                else { 
+                
+                }
             }
-            if(resurs.Ikonica != "")
+            if (resurs.Ikonica != "")
             {
                 iconDisplay.Source = new BitmapImage(new Uri(resurs.Ikonica));
                 removeButton.Visibility = Visibility.Visible;
             }
+            
         }
 
       
@@ -344,6 +348,12 @@ namespace _1_1EX
             resurs.Eksploatacija = (bool)eksploatacija.IsChecked;
             resurs.Mera1 = (Mera)Enum.Parse(typeof(Mera), mera.Text);
             resurs.Datum = (DateTime)picker.SelectedDate;
+
+            if (resurs.Ikonica == "")
+            {
+                string startupPath = Environment.CurrentDirectory;
+                resurs.Ikonica = startupPath.Substring(0, startupPath.Length - 9) + "/resources.png";
+            }
 
             MainWindow.resursi.Add(resurs);
             MessageBox.Show("Resource has been modifyed!" + MainWindow.resursi.Count

@@ -63,6 +63,12 @@ namespace _1_1EX.WinTip
             tip.Id = tipid.Text;
             tip.Ime = tipime.Text;
             tip.Opis = tipopis.Text;
+            if (tip.Ikonica == "")
+            {
+                string startupPath = Environment.CurrentDirectory;
+                tip.Ikonica = startupPath.Substring(0, startupPath.Length - 9) + "/type.png";
+            }
+
             TypeManagement.types.Add(tip);
             TypeManagement.displayTable.Add(tip);
             this.Close();
