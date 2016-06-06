@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:src="clr-namespace:_1_1EX"
         Title="Vortex" Icon="/1_1EX;component/vortex.png" WindowState="Maximized" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="350" Width="525">
+
+
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar>
@@ -12,7 +14,7 @@
         </ToolBarTray>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel DockPanel.Dock="Left" MinWidth="200">
-              <Expander Margin="5" Padding="1" Header="Resources">
+              <Expander Margin="5" Padding="1" Header="Resources" Name="exp_res">
                     <StackPanel Orientation="Vertical">
                         <Border x:Name="border" BorderBrush="SkyBlue" BorderThickness="1" Height="136">
                             <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
@@ -56,7 +58,7 @@
                     </Grid>
                 </StackPanel>
                 </Expander>
-                <Expander Margin="5" Padding="1" Header="Add Resource">
+                <Expander Margin="5" Padding="1" Header="Add Resource" Name="exp_add">
                 <StackPanel Orientation="Vertical">
                     <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
                     <Grid>
@@ -201,7 +203,7 @@
                     </Grid>
                 </StackPanel>
             </Expander>
-            <Expander Margin="5" Padding="1" Header="Map Filter">
+            <Expander Margin="5" Padding="1" Header="Map Filter" Name="exp_filt">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -242,17 +244,16 @@
 
                 </Grid>
             </Expander>
-                <Expander  Margin="5" Padding="1" Header="Map View">
+                <Expander  Margin="5" Padding="1" Header="Map View" Name="exp_view">
                     <StackPanel>
-                    <RadioButton GroupName="Os" Content="map1"  Checked="Switch_Active" />
-                        <RadioButton GroupName="Os" Content="map2"  Checked="Switch_Active" />
-                        <RadioButton GroupName="Os" Content="map3"  Checked="Switch_Active" />
-                        <RadioButton GroupName="Os" Content="map4"  Checked="Switch_Active" />
-                        <RadioButton GroupName="v" Content="singleView"  Checked="Switch_View" />
-                        <RadioButton GroupName="v" Content="4View"  Checked="Switch_View" />
+                    <RadioButton Name="mp1" GroupName="Os" Content="map1"  Checked="Switch_Active" />
+                        <RadioButton Name="mp2" GroupName="Os" Content="map2"  Checked="Switch_Active" />
+                        <RadioButton Name="mp3" GroupName="Os" Content="map3"  Checked="Switch_Active" />
+                        <RadioButton Name="mp4" GroupName="Os" Content="map4"  Checked="Switch_Active" />
+                        
                     </StackPanel>
                 </Expander>
-                <Expander  Margin="5" Padding="1" Header="Security" Height="110">
+                <Expander  Margin="5" Padding="1" Header="Security" Height="110" Name="exp_sec">
                     <StackPanel Height="80">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type Button}">

@@ -26,8 +26,23 @@ namespace _1_1EX
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        //precice
+        public static RoutedCommand ResetMapFilter = new RoutedCommand();
+        public static RoutedCommand SwitchMap1 = new RoutedCommand();
+        public static RoutedCommand SwitchMap2 = new RoutedCommand();
+        public static RoutedCommand SwitchMap3 = new RoutedCommand();
+        public static RoutedCommand SwitchMap4 = new RoutedCommand();
 
-        Canvas c,c1,c2,c3,c4;
+        public static RoutedCommand Exp_res = new RoutedCommand();
+        public static RoutedCommand Exp_add = new RoutedCommand();
+        public static RoutedCommand Exp_filt = new RoutedCommand();
+        public static RoutedCommand Exp_view = new RoutedCommand();
+        public static RoutedCommand Exp_sec= new RoutedCommand();
+
+        public static RoutedCommand Type_mngr = new RoutedCommand();
+        public static RoutedCommand Tag_mngr = new RoutedCommand();
+
+        Canvas c;
 
         public static SetPassword sp;
 
@@ -91,8 +106,131 @@ namespace _1_1EX
 
 
             loadMapContent();
+            dodaj_precice();
         }
 
+        private void dodaj_precice()
+        {
+
+            //resetuj filter za mapu
+            ResetMapFilter.InputGestures.Add(new KeyGesture(Key.R, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(ResetMapFilter, Reset_Map_Filter));
+
+            //menjanje mapa
+            SwitchMap1.InputGestures.Add(new KeyGesture(Key.D1, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(SwitchMap1,nest1));
+            SwitchMap2.InputGestures.Add(new KeyGesture(Key.D2, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(SwitchMap2, nest2));
+            SwitchMap3.InputGestures.Add(new KeyGesture(Key.D3, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(SwitchMap3, nest3));
+            SwitchMap4.InputGestures.Add(new KeyGesture(Key.D4, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(SwitchMap4, nest4));
+
+            Exp_res.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Exp_res, togl1));
+
+            Exp_add.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Exp_add, togl2));
+
+            Exp_filt.InputGestures.Add(new KeyGesture(Key.D, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Exp_filt, togl3));
+
+            Exp_view.InputGestures.Add(new KeyGesture(Key.F, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Exp_view, togl4));
+
+            Exp_sec.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Exp_sec, togl5));
+
+            Type_mngr.InputGestures.Add(new KeyGesture(Key.Q, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Type_mngr, TypeManager));
+
+            Tag_mngr.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(Tag_mngr, TagManager));
+
+
+        }
+
+        private void togl1(object sender, EventArgs e)
+        {
+            if (exp_res.IsExpanded)
+            {
+                exp_res.IsExpanded = false;
+            }
+            else
+            {
+                exp_res.IsExpanded = true;
+            }
+        }
+
+        private void togl2(object sender, EventArgs e)
+        {
+            if (exp_add.IsExpanded)
+            {
+                exp_add.IsExpanded = false;
+            }
+            else
+            {
+                exp_add.IsExpanded = true;
+            }
+        }
+
+
+        private void togl3(object sender, EventArgs e)
+        {
+            if (exp_filt.IsExpanded)
+            {
+                exp_filt.IsExpanded = false;
+            }
+            else
+            {
+                exp_filt.IsExpanded = true;
+            }
+        }
+
+        private void togl4(object sender, EventArgs e)
+        {
+            if (exp_view.IsExpanded)
+            {
+                exp_view.IsExpanded = false;
+            }
+            else
+            {
+                exp_view.IsExpanded = true;
+            }
+        }
+
+        private void togl5(object sender, EventArgs e)
+        {
+            if (exp_sec.IsExpanded)
+            {
+                exp_sec.IsExpanded = false;
+            }
+            else
+            {
+                exp_sec.IsExpanded = true;
+            }
+        }
+        private void nest1(object sender,EventArgs e)
+        {
+            mp1.IsChecked = true;
+
+        }
+        private void nest2(object sender, EventArgs e)
+        {
+            mp2.IsChecked = true;
+
+        }
+        private void nest3(object sender, EventArgs e)
+        {
+            mp3.IsChecked = true;
+            
+
+        }
+        private void nest4(object sender, EventArgs e)
+        {
+            mp4.IsChecked = true;
+
+        }
 
         public void ucitajResurse()
         {
@@ -490,7 +628,7 @@ namespace _1_1EX
 
         private void Reset_Map_Filter(object sender, EventArgs e)
         {
-            textBox1.Text = "";
+            map_filter_text.Text = "";
             obnovljiv_q.IsChecked = false;
             vaznost_q.IsChecked = false;
             eksploatacija_q.IsChecked = false;
@@ -538,40 +676,7 @@ namespace _1_1EX
             loadMapContent();
         }
 
-        private void Switch_View(object sender, EventArgs e)
-        {
-            string view_type = (string)((RadioButton)sender).Content;
-
-            if (view_type == "4View")
-            {
-                c = mapa;
-                mapgrid.Children.Clear();
-
-                ColumnDefinition col1 = new ColumnDefinition();
-                col1.Width = new GridLength(1, GridUnitType.Star);
-                ColumnDefinition col2 = new ColumnDefinition();
-                col2.Width = new GridLength(1, GridUnitType.Star);
-
-                mapgrid.ColumnDefinitions.Add(col1);
-                mapgrid.ColumnDefinitions.Add(col2);
-
-                RowDefinition rd1 = new RowDefinition();
-                rd1.Height = new GridLength(1, GridUnitType.Star);
-                RowDefinition rd = new RowDefinition();
-                rd.Height = new GridLength(1, GridUnitType.Star);
-                mapgrid.RowDefinitions.Add(rd1);
-                mapgrid.RowDefinitions.Add(rd);
-
-                
-
-            }
-            else
-            {
-                mapgrid.ColumnDefinitions.Clear();
-                mapgrid.RowDefinitions.Clear();
-                mapgrid.Children.Add(c);
-            }
-        }
+       
 
         private void modifyResourceAction(int i)
         {
