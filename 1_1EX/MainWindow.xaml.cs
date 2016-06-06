@@ -28,7 +28,8 @@ namespace _1_1EX
     {
 
         Canvas c,c1,c2,c3,c4;
-       
+
+        public static SetPassword sp;
 
         //za drag
         Image drag_image=null;
@@ -60,8 +61,6 @@ namespace _1_1EX
         public MainWindow()
         {
 
-            //WinResurs wr = new WinResurs();
-            //wr.Show();
 
             InitializeComponent();
             this.DataContext = this;
@@ -570,27 +569,10 @@ namespace _1_1EX
 
             // ... Get nullable DateTime from SelectedDate.
             DateTime? date = picker.SelectedDate;
-
-            if (date == null)
-            {
-                // ... A null object.
-                this.Title = "No date";
-            }
-            else
-            {
-                // ... No need to display the time.
-                this.Title = date.Value.ToShortDateString();
-            }
-
             
         }
 
-        private void title(object sender,
-        ContextMenuEventArgs e)
-        {
-            this.Title = "das";
-
-        }
+        
 
         #region NotifyProperties
         public static Resurs resurs;
@@ -697,6 +679,19 @@ namespace _1_1EX
             resurs = new Resurs();
             dodajResursFormReset();
 
+        }
+
+        private void skiniSifru(object sender, RoutedEventArgs e)
+        {
+            string path = Environment.CurrentDirectory + "\\pass.txt";
+            File.Create(path).Close();
+            MessageBox.Show("Now the password is not required to run the program");
+        }
+
+        private void dodajSifru(object sender, RoutedEventArgs e)
+        {
+            sp = new SetPassword();
+            sp.Show();
         }
 
         private void EtiketaClick(object sender, RoutedEventArgs e)

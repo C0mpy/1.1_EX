@@ -63,6 +63,12 @@
     </ApplicationDefinition>
     <Compile Include="Model\MapModel.cs" />
     <Compile Include="Serializer.cs" />
+    <Compile Include="SetPassword.xaml.cs">
+      <DependentUpon>SetPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SignInWindow.xaml.cs">
+      <DependentUpon>SignInWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinEtiketa\EtiketaWin.xaml.cs">
       <DependentUpon>EtiketaWin.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
     <Compile Include="WinTip\WinTip.xaml.cs">
       <DependentUpon>WinTip.xaml</DependentUpon>
     </Compile>
+    <Page Include="SetPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinEtiketa\EtiketaWin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Libs\Xceed.Wpf.Toolkit.dll" />
+    <Resource Include="vortex.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
