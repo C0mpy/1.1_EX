@@ -76,7 +76,6 @@ namespace _1_1EX
         public MainWindow()
         {
 
-
             InitializeComponent();
             this.DataContext = this;
             resurs = new Resurs();
@@ -84,27 +83,29 @@ namespace _1_1EX
             types = Serializer.LoadTip();
             tags = Serializer.LoadEtiketa();
             resursi = Serializer.ReadResources();
-            ucitajResurse();
             picker.SelectedDate = DateTime.Today;
 
             //meci u funkciju kasnije da ne bude ruzno :S
             {
                 c = mapa;
-            
+
             }
             frekvencija_q.SelectedIndex = 0; //hack
+            box_frekvencija_q.SelectedIndex = 0;
             type_q.Items.Add("All");
             foreach (TipResursa t in types)
             {
                 type_q.Items.Add(t.Ime);
+                box_type_q.Items.Add(t.Ime);
             }
             type_q.SelectedIndex = 0;
+            box_type_q.SelectedIndex = 0;
             map_model["map1"] = new List<MapModel>();
             map_model["map2"] = new List<MapModel>();
             map_model["map3"] = new List<MapModel>();
             map_model["map4"] = new List<MapModel>();
-
-
+            ucitajResurse(resursi);
+            fillBoxFilterTags();
             loadMapContent();
             dodaj_precice();
         }
@@ -232,14 +233,13 @@ namespace _1_1EX
 
         }
 
-        public void ucitajResurse()
-        {
-            
 
+        public void ucitajResurse(List<Resurs> res)
+        {
             int num_col = 6;
             gr1.Children.Clear();
             gr1.Height = 136;
-            int br = resursi.Count;
+            int br = res.Count;
             Image[] carImg = new Image[br];
 
             MenuItem[] mi = new MenuItem[br];
@@ -282,7 +282,7 @@ namespace _1_1EX
                 }
 
                 carImg[i] = new Image();
-                carImg[i].Source = new BitmapImage(new Uri(resursi[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
+                carImg[i].Source = new BitmapImage(new Uri(res[i].Ikonica, UriKind.RelativeOrAbsolute)); ;
 
                              
                 carImg[i].ToolTip = createToolTip(i);
@@ -300,7 +300,7 @@ namespace _1_1EX
                     cm.Items.Add(modMenuItem);
                     cm.Items.Add(delMenuItem);
                     carImg[i].ContextMenu = cm;
-                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],resursi[index]);
+                    carImg[i].MouseLeftButtonDown += (sender, e) => startDrag(carImg[index],res[index]);
                 
 
                 carImg[i].Width = 40;
@@ -637,6 +637,106 @@ namespace _1_1EX
             loadMapContent();
         }
 
+        private void Box_Filter(object sender, EventArgs e)
+        {
+            //filtrirani mapmodel
+            List<Resurs> filter_result = new List<Resurs>();
+            //pokupi sve uslove
+            string name_query = box_filter_text.Text;
+
+            bool obnovljivv = (bool)box_obnovljiv_q.IsChecked;
+            bool vazno = (bool)box_vaznost_q.IsChecked;
+            bool eksploat = (bool)box_eksploatacija_q.IsChecked;
+
+            string freq = ((ComboBoxItem)box_frekvencija_q.SelectedItem).Content.ToString();
+            string ty = "All";
+            try
+            {
+                ty = (string)box_type_q.SelectedItem;
+            }
+            catch (Exception ee)
+            {
+                //nista jbg :/
+            }
+            try
+            {
+                foreach (Resurs r in resursi)
+                {
+                    bool ok = true;
+                    if (!r.Ime.ToLower().Contains(name_query.ToLower()))
+                        ok = false;
+                    //ove filter
+                    if (obnovljivv)
+                    {
+                        if (!r.Obnovljiv)
+                            ok = false;
+                    }
+                    else
+                    {
+                        if(r.Obnovljiv)
+                            ok = false;
+                    }
+                    if (vazno)
+                    {
+                        if (!r.Vaznost)
+                            ok = false;
+                    }
+                    else 
+                    {
+                        if (r.Vaznost)
+                            ok = false;
+                    }
+                    if (eksploat)
+                    {
+                        if (!r.Eksploatacija)
+                            ok = false;
+                    }
+                    else {
+                        if(r.Eksploatacija)
+                            ok = false;
+                    }
+                    for (int i = 0; i < FindVisualChildren<CheckBox>(gr4).ToList().Count; i++)
+                    {
+                        CheckBox cb = FindVisualChildren<CheckBox>(gr4).ElementAt(i);
+                        if (cb.IsChecked == true)
+                        {
+                            bool hazTag = false;
+                            for (int j = 0; j < r.Etikete1.Count; j++)
+                            {
+                                if (tags.ElementAt(i).Id == r.Etikete1.ElementAt(j).Id)
+                                {
+                                    hazTag = true;
+                                }
+                            }
+                            if (!hazTag)
+                            {
+                                ok = false;
+                                break;
+                            }
+                        }
+                    }
+                    //frekvencija filter
+                    if (freq != "All")
+                        if (r.Frekvencija1.ToString() != freq)
+                            ok = false;
+
+                    //tip filter
+                    if (ty != "All")
+                        if (r.Tip.Ime != ty)
+                            ok = false;
+
+                    if (ok)
+                        filter_result.Add(r);
+                }
+            }
+            catch (Exception eee)
+            {
+            }
+            ucitajResurse(filter_result);
+            
+
+        }
+
         private void loadMapContent()
         {
 
@@ -682,13 +782,14 @@ namespace _1_1EX
         {
             WinResurs wr = new WinResurs(this, resursi[i]);
             wr.ShowDialog();
+            ucitajResurse(resursi);
         }
 
         private void deleteResourceAction(int i)
         {
             MessageBox.Show("Resource with id " + resursi[i].Id + " has been deleted!");
             resursi.RemoveAt(i);
-            ucitajResurse();
+            ucitajResurse(resursi);
             Serializer.WriteResources();
         }
 
@@ -861,7 +962,7 @@ namespace _1_1EX
                 
             resursi.Add(resurs);
 
-            ucitajResurse();
+            ucitajResurse(resursi);
             Serializer.WriteResources();
             resurs = new Resurs();
             dodajResursFormReset();
@@ -901,6 +1002,17 @@ namespace _1_1EX
             }
         }
 
+        private void Box_Filter_Reset(object sender, RoutedEventArgs e)
+        {
+            box_filter_text.Text = "";
+            box_obnovljiv_q.IsChecked = false;
+            box_vaznost_q.IsChecked = false;
+            box_eksploatacija_q.IsChecked = false;
+            box_frekvencija_q.SelectedIndex = 0;
+            box_type_q.SelectedIndex = 0;
+            ucitajResurse(resursi);
+        }
+
         private void TypeManager(object sender, RoutedEventArgs e)
         {
             var ew = new _1_1EX.WinTip.TypeManagement(types);
@@ -933,6 +1045,7 @@ namespace _1_1EX
             darkwindow.Show();
             ew.ShowDialog();
             darkwindow.Close();
+            fillBoxFilterTags();
         }
 
         private void TagSelect(object sender, RoutedEventArgs e)
@@ -957,6 +1070,61 @@ namespace _1_1EX
             resurs.Ikonica = "";
             iconDisplay.Source = null;
             removeButton.Visibility = Visibility.Collapsed;
+        }
+
+        public void fillBoxFilterTags()
+        {
+            gr4.Children.Clear();
+
+            for (int i = 0; i < tags.Count(); i++)
+            {
+                DockPanel sp = new DockPanel();
+                sp.HorizontalAlignment = HorizontalAlignment.Left;
+                sp.Height = 30;
+                sp.Width = 180;
+                CheckBox cb = new CheckBox();
+                cb.Checked += Box_Filter;
+                cb.Unchecked += Box_Filter;
+                cb.VerticalAlignment = VerticalAlignment.Center;
+                Thickness margin = cb.Margin;
+                margin.Right = 10;
+                cb.Margin = margin;
+                cb.SetValue(DockPanel.DockProperty, Dock.Left);
+                Label lb = new Label();
+                lb.Height = 30;
+                lb.Content = tags[i].Id;
+                Label lb2 = new Label();
+                lb2.Height = 30;
+                lb2.Background = new SolidColorBrush(tags[i].Boja);
+                lb2.Width = 30;
+                lb2.SetValue(DockPanel.DockProperty, Dock.Right);
+                lb.SetValue(DockPanel.DockProperty, Dock.Top);
+                sp.Children.Add(cb);
+                sp.Children.Add(lb2);
+                sp.Children.Add(lb);
+                gr4.Children.Add(sp);
+            }
+        }
+
+        //pa zar mora ovo da se koristi da bih dobio element iz DataGridTemplateColumn u WPF?!
+        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
         }
 
     }

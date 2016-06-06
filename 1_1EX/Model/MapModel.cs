@@ -12,8 +12,6 @@ namespace _1_1EX.Model
         double left;
         Resurs res;
 
-
-
         public  MapModel() { }
 
         public MapModel( double t, double l, Resurs r)

@@ -22,40 +22,49 @@
                             </ScrollViewer>
                         </Border>
                         <Grid Margin="10,5,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="200" />
                         </Grid.ColumnDefinitions>
                         <!-- Name filter tj. search -->
                         <Label Grid.Row="0" Grid.Column="0" Content="Name:"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Name="textBox1"/>
+                        <TextBox x:Name="box_filter_text" Grid.Row="0" Grid.Column="1" TextChanged="Box_Filter"/>
                         <!-- obnovljiv vaznost eksploatacija filter -->
-                        <CheckBox x:Name="resources_obnovljiv_q" Grid.Row="1" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right"  Checked="Map_Filter" Unchecked="Map_Filter" >Renewable Resource</CheckBox>
-                        <CheckBox x:Name="resources_vaznost_q" Grid.Row="2" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right" Checked="Map_Filter" Unchecked="Map_Filter">Strategic Importance</CheckBox>
-                        <CheckBox x:Name="resources_eksploatacija_q" Grid.Row="3" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right" Checked="Map_Filter" Unchecked="Map_Filter">Exploitable</CheckBox>
+                        <CheckBox x:Name="box_obnovljiv_q" Checked="Box_Filter" Unchecked="Box_Filter" Grid.Row="1" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Renewable Resource</CheckBox>
+                        <CheckBox x:Name="box_vaznost_q" Checked="Box_Filter" Unchecked="Box_Filter"  Grid.Row="2" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Strategic Importance</CheckBox>
+                        <CheckBox x:Name="box_eksploatacija_q" Checked="Box_Filter" Unchecked="Box_Filter"  Grid.Row="3" Grid.Column="1" Margin="0, 5, 0 , 5" HorizontalAlignment="Right">Exploitable</CheckBox>
 
                         <Label Grid.Row="4" Grid.Column="0" Content="Frequency:"/>
-                        <ComboBox x:Name="resources_frekvencija_q" Grid.Row="4" Grid.Column="1" SelectedValuePath="Content" >
+                            <ComboBox x:Name="box_frekvencija_q" SelectionChanged="Box_Filter" Grid.Row="4" Grid.Column="1" SelectedValuePath="Content" >
                             <ComboBoxItem >All</ComboBoxItem>
                             <ComboBoxItem>Rare</ComboBoxItem>
                             <ComboBoxItem>Common</ComboBoxItem>
                             <ComboBoxItem>Universal</ComboBoxItem>
                         </ComboBox>
 
-                        <Label Grid.Row="5" Grid.Column="0" Content="Type:"/>
-                        <ComboBox x:Name="resources_type_q" Grid.Row="5" Grid.Column="1" SelectedValuePath="Content"  />
-                        <Button Grid.Row="6" Grid.Column="1" x:Name="resourcesresetFilter" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
+                            <Label Grid.Row="5" Grid.Column="0" Content="Type:"/>
+                            <ComboBox x:Name="box_type_q" SelectionChanged="Box_Filter" Grid.Row="5" Grid.Column="1" SelectedValuePath="Content">
+                                <ComboBoxItem>All</ComboBoxItem>
+                            </ComboBox>
+                            <Label Grid.Row="6" Grid.Column="0" Content="Tags:"/>
+                            <Border Grid.Row="6" Grid.Column="1" x:Name="border4" BorderBrush="SkyBlue" BorderThickness="1" Height="120">
+                                <ScrollViewer VerticalScrollBarVisibility="Visible" PanningMode="VerticalOnly">
+                                    <StackPanel Name="gr4" Height="120" Width="273" Orientation="Vertical"></StackPanel>
+                                </ScrollViewer>
+                            </Border>
+                            <Button Grid.Row="7" Grid.Column="1" x:Name="resourcesresetFilter" Click="Box_Filter_Reset" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
                     MinWidth="120" MinHeight="25" Content="   Reset "/>
-                    </Grid>
+                        </Grid>
                 </StackPanel>
                 </Expander>
                 <Expander Margin="5" Padding="1" Header="Add Resource" Name="exp_add">
@@ -236,9 +245,6 @@
 
                     <Label Grid.Row="5" Grid.Column="0" Content="Type:"/>
                     <ComboBox x:Name="type_q" Grid.Row="5" Grid.Column="1" SelectionChanged="Map_Filter" SelectedValuePath="Content"  />
-                  
-
-
                     <Button Grid.Row="6" Grid.Column="1" x:Name="resetFilter" Margin="0, 10, 0 , 5" HorizontalAlignment="Right" 
                     MinWidth="120" MinHeight="25" Content="   Reset " Click="Reset_Map_Filter"/>
 
@@ -261,7 +267,6 @@
                             </Style>
                         </StackPanel.Resources>
                         <Button Content="Set password" Height="25" Name="button1" Width="105" Click="dodajSifru"/>
-
                         <Button Content="Without password" Height="25" Name="button2" Width="105" Click="skiniSifru" />
                     </StackPanel>
                 </Expander>

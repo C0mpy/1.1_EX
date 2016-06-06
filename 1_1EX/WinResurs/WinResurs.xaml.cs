@@ -358,7 +358,6 @@ namespace _1_1EX
             MainWindow.resursi.Add(resurs);
             MessageBox.Show("Resource has been modifyed!" + MainWindow.resursi.Count
                 );
-            mw.ucitajResurse();
             Serializer.WriteResources();
             closedByUser = true;
             this.Close();
